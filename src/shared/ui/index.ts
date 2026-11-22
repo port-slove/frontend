@@ -1,8 +1,10 @@
 export { ActionOption, type ActionOptionProps } from "./action-option";
 export { AlertItem, type AlertItemProps } from "./alert-item";
+export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
+export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
 export { FilterChip, type FilterChipProps } from "./filter-chip";
 export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header";
@@ -13,4 +15,5 @@ export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
+export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";

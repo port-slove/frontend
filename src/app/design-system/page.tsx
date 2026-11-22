@@ -3,11 +3,13 @@ import { notFound } from "next/navigation";
 import {
   ActionOption,
   AlertItem,
+  Banner,
   Button,
   Card,
   CardDescription,
   CardTitle,
   Chip,
+  ConfirmDialog,
   DateRange,
   FilterChip,
   Header,
@@ -18,6 +20,7 @@ import {
   ScheduleBlock,
   SelectField,
   StatTile,
+  Toast,
   Toggle,
 } from "@/shared/ui";
 
@@ -324,6 +327,46 @@ export default function DesignSystemPage() {
             time="00:00"
           />
         </div>
+        <div className="flex max-w-160 flex-col gap-3">
+          <Banner tone="error" icon={<PlaceholderIcon />} title="배너 제목" description="설명" />
+          <Banner tone="warning" icon={<PlaceholderIcon />} title="배너 제목" description="설명" />
+          <Banner tone="info" icon={<PlaceholderIcon />} title="배너 제목" description="설명" />
+        </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <Toast
+            tone="error"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            description="설명 문구"
+            time="방금"
+            actionIcon={<PlaceholderIcon />}
+            closeIcon={<PlaceholderIcon />}
+          />
+          <Toast
+            tone="warning"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            description="설명 문구"
+            time="방금"
+            actionIcon={<PlaceholderIcon />}
+            closeIcon={<PlaceholderIcon />}
+          />
+          <Toast
+            tone="info"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            description="설명 문구"
+            time="방금"
+            actionIcon={<PlaceholderIcon />}
+            closeIcon={<PlaceholderIcon />}
+          />
+        </div>
+        <ConfirmDialog
+          icon={<PlaceholderIcon />}
+          title="권고를 전송할까요?"
+          description="설명 문구"
+          className="w-110"
+        />
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
           <CardDescription>rounded xl, soft blue shadow, 24 padding</CardDescription>
