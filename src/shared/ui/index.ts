@@ -11,6 +11,7 @@ export { Chip, type ChipProps, type ChipTone } from "./chip";
 export { CompareCard, type CompareCardProps } from "./compare-card";
 export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
+export { DeductionRow, type DeductionRowProps } from "./deduction-row";
 export { FilterChip, type FilterChipProps } from "./filter-chip";
 export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header";
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
