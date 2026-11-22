@@ -4,8 +4,11 @@ import { cn } from "@/shared/lib/cn";
 
 const variantClass = {
   primary: "bg-brand text-on-brand shadow-md hover:bg-brand-pressed active:bg-brand-pressed",
-  secondary: "bg-brand-sub text-brand active:bg-blue-300",
+  secondary: "bg-surface-muted text-primary hover:bg-gray-200 active:bg-gray-200",
   outline: "border border-default bg-surface text-primary hover:bg-page active:bg-surface-muted",
+  ghost: "text-secondary hover:bg-page active:bg-surface-muted",
+  danger: "bg-error text-on-brand hover:bg-red-700 active:bg-red-700",
+  dark: "bg-inverse text-on-brand hover:bg-gray-800 active:bg-gray-800",
 } as const;
 
 export type ButtonVariant = keyof typeof variantClass;
