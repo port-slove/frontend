@@ -25,3 +25,5 @@ export { TableVesselCell, type TableVesselCellProps } from "./table-vessel-cell"
 export { TextField, type TextFieldProps } from "./text-field";
 export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";
+export { Tooltip, type TooltipProps } from "./tooltip";
+export { TooltipRow, type TooltipRowProps } from "./tooltip-row";
