@@ -3,6 +3,7 @@ export { AlertItem, type AlertItemProps } from "./alert-item";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
+export { CardHeader, type CardHeaderProps } from "./card-header";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
 export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
@@ -11,6 +12,7 @@ export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header"
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
+export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";

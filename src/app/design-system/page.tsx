@@ -7,6 +7,7 @@ import {
   Button,
   Card,
   CardDescription,
+  CardHeader,
   CardTitle,
   Chip,
   ConfirmDialog,
@@ -16,6 +17,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  PageTitle,
   Progress,
   ScheduleBlock,
   SelectField,
@@ -215,6 +217,8 @@ export default function DesignSystemPage() {
           avatarIcon={<PlaceholderIcon />}
           userName="REVLIS"
         />
+        <PageTitle title="페이지 제목" subtitle="설명 문구" />
+        <CardHeader title="카드 제목" badge={<Chip>8건</Chip>} />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
