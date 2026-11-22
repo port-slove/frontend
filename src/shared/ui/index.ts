@@ -47,3 +47,16 @@ export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";
 export { Tooltip, type TooltipProps } from "./tooltip";
 export { TooltipRow, type TooltipRowProps } from "./tooltip-row";
+export {
+  AlertIcon,
+  ArrowRightIcon,
+  BellIcon,
+  ChevronDownIcon,
+  ExpandIcon,
+  ExportIcon,
+  type IconProps,
+  LogoIcon,
+  SearchIcon,
+  UserIcon,
+  WarningIcon,
+} from "./icons";
