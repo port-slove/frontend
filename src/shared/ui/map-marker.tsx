@@ -18,7 +18,7 @@ export function MapMarker({ status = "항해 중", className, ...props }: MapMar
         <span className="size-4 rounded-full border-2 border-white bg-warning" />
       )}
       {status === "묘박" && (
-        <span className="bg-secondary size-3 rounded-xs border-2 border-white" />
+        <span className="size-3 rounded-xs border-2 border-white bg-gray-600" />
       )}
       {status === "검증 필요" && (
         <span className="flex size-4 rotate-45 items-center justify-center">
