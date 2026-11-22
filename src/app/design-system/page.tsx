@@ -9,6 +9,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  SelectField,
   Toggle,
 } from "@/shared/ui";
 
@@ -211,6 +212,7 @@ export default function DesignSystemPage() {
           <Chip tone="dark">Dark</Chip>
           <InfoChip label="풍속" value="4.2 m/s" />
           <Input className="w-70" placeholder="Placeholder" />
+          <SelectField value="전체" count="6/6" className="w-50" />
         </div>
         <div className="flex flex-wrap items-center gap-6">
           <IconCircle tone="brand" icon={<PlaceholderIcon />} />
