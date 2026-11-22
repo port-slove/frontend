@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
   Chip,
+  CompareCard,
   ConfirmDialog,
   DateRange,
   FilterChip,
@@ -284,6 +285,27 @@ export default function DesignSystemPage() {
             { label: "권고 속도", value: "13.6 → 11.6 kn" },
           ]}
         />
+        <div className="flex flex-wrap items-start gap-4">
+          <CompareCard
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
+          <CompareCard
+            recommended
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
+        </div>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>

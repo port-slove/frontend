@@ -6,6 +6,7 @@ export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
+export { CompareCard, type CompareCardProps } from "./compare-card";
 export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
 export { FilterChip, type FilterChipProps } from "./filter-chip";
