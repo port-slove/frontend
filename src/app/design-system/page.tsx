@@ -10,6 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  Checkbox,
   Chip,
   ConfirmDialog,
   DateRange,
@@ -19,6 +20,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  LayerToggle,
   PageTitle,
   Progress,
   PropertyRow,
@@ -29,6 +31,7 @@ import {
   TableHeaderCell,
   TableVesselCell,
   TextField,
+  TimelineBar,
   Toast,
   Toggle,
   Tooltip,
@@ -285,6 +288,28 @@ export default function DesignSystemPage() {
             { label: "권고 속도", value: "13.6 → 11.6 kn" },
           ]}
         />
+        <div className="flex flex-wrap items-start gap-3">
+          <TimelineBar
+            status="하역 중"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="접안 예정"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="대기 예상"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+          <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+        </div>
         <DeductionRow
           reason="AIS·레이더 위치 불일치"
           detail="1.8 NM 차이 · 20:27"
@@ -322,6 +347,10 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+          <Checkbox checked />
+          <Checkbox checked={false} />
+          <LayerToggle checked label="항적" />
+          <LayerToggle checked={false} label="항적" />
         </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
