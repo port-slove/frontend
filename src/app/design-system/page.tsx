@@ -1,6 +1,15 @@
 import { notFound } from "next/navigation";
 
-import { Badge, Button, Card, CardDescription, CardTitle, Chip, Input } from "@/shared/ui";
+import {
+  Badge,
+  Button,
+  Card,
+  CardDescription,
+  CardTitle,
+  Chip,
+  DateRange,
+  Input,
+} from "@/shared/ui";
 
 // 개발용 토큰/컴포넌트 미리보기 페이지. 프로덕션 빌드에서는 404.
 const palettes = {
@@ -186,6 +195,7 @@ export default function DesignSystemPage() {
           <Badge tone="error">Error</Badge>
           <Badge tone="warning">Warning</Badge>
           <Input className="w-70" placeholder="Placeholder" />
+          <DateRange range="2026.11.07 – 2026.11.09" />
         </div>
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
