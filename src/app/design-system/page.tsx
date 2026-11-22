@@ -10,6 +10,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  Checkbox,
   Chip,
   ConfirmDialog,
   DateRange,
@@ -18,6 +19,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  LayerToggle,
   PageTitle,
   Progress,
   PropertyRow,
@@ -315,6 +317,10 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+          <Checkbox checked />
+          <Checkbox checked={false} />
+          <LayerToggle checked label="항적" />
+          <LayerToggle checked={false} label="항적" />
         </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
