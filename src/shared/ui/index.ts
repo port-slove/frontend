@@ -7,6 +7,7 @@ export { Card, CardDescription, CardTitle } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
 export { Checkbox, type CheckboxProps } from "./checkbox";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
+export { CompareCard, type CompareCardProps } from "./compare-card";
 export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
 export { FilterChip, type FilterChipProps } from "./filter-chip";

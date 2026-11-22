@@ -12,6 +12,7 @@ import {
   CardTitle,
   Checkbox,
   Chip,
+  CompareCard,
   ConfirmDialog,
   DateRange,
   FilterChip,
@@ -308,6 +309,27 @@ export default function DesignSystemPage() {
           />
           <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
           <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+        </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <CompareCard
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
+          <CompareCard
+            recommended
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
         </div>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
