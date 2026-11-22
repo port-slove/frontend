@@ -22,5 +22,6 @@ export { StatTile, type StatTileProps } from "./stat-tile";
 export { TableCell, type TableCellProps, type TableCellType } from "./table-cell";
 export { TableHeaderCell, type TableHeaderCellProps } from "./table-header-cell";
 export { TableVesselCell, type TableVesselCellProps } from "./table-vessel-cell";
+export { TextField, type TextFieldProps } from "./text-field";
 export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";

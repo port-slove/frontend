@@ -27,6 +27,7 @@ import {
   TableCell,
   TableHeaderCell,
   TableVesselCell,
+  TextField,
   Toast,
   Toggle,
 } from "@/shared/ui";
@@ -267,6 +268,7 @@ export default function DesignSystemPage() {
           <PropertyRow label="항목" value="값" />
           <PropertyRow label="흘수" value="12.1m" />
         </div>
+        <TextField multiline className="w-70" placeholder="내용을 입력해주세요." />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -283,6 +285,7 @@ export default function DesignSystemPage() {
           <Chip tone="dark">Dark</Chip>
           <InfoChip label="풍속" value="4.2 m/s" />
           <Input className="w-70" placeholder="Placeholder" />
+          <TextField className="w-70" placeholder="제목을 입력해주세요." />
           <FilterChip field="상태" value="하역 중" />
           <DateRange range="2026.11.07 – 2026.11.09" />
           <SelectField value="전체" count="6/6" className="w-50" />
