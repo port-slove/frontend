@@ -30,6 +30,8 @@ import {
   TextField,
   Toast,
   Toggle,
+  Tooltip,
+  TooltipRow,
 } from "@/shared/ui";
 
 // 아이콘 시스템 도입 전 미리보기 전용 placeholder (실제 컴포넌트는 아이콘을 prop으로 전달받음)
@@ -269,6 +271,19 @@ export default function DesignSystemPage() {
           <PropertyRow label="흘수" value="12.1m" />
         </div>
         <TextField multiline className="w-70" placeholder="내용을 입력해주세요." />
+        <TooltipRow label="항목" value="값" className="w-70" />
+        <Tooltip
+          label="선박명"
+          title="HANBIT PIONEER"
+          code="(HBP2611)"
+          rows={[
+            { label: "상태", value: "접안 예정" },
+            { label: "선석", value: "3부두 B2" },
+            { label: "접안 예정", value: "11.07 16:30" },
+            { label: "출항 예정", value: "11.08 08:00" },
+            { label: "권고 속도", value: "13.6 → 11.6 kn" },
+          ]}
+        />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
