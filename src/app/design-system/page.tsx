@@ -17,6 +17,7 @@ import {
   DateRange,
   FilterChip,
   Header,
+  HistoryStep,
   IconCircle,
   InfoChip,
   Input,
@@ -231,6 +232,17 @@ export default function DesignSystemPage() {
         />
         <PageTitle title="페이지 제목" subtitle="설명 문구" />
         <CardHeader title="카드 제목" badge={<Chip>8건</Chip>} />
+        <div className="flex max-w-100 flex-col">
+          <HistoryStep time="14:18" title="권고 생성" description="JIT 엔진 · 12.4 → 11.6 kn" />
+          <HistoryStep time="14:20" title="관제사 승인" description="REVLIS" />
+          <HistoryStep time="14:27" title="선박 수신" description="이 화면" />
+          <HistoryStep
+            done={false}
+            time="14:37"
+            title="응답 기한"
+            description="응답이 없으면 VHF로 재안내합니다"
+          />
+        </div>
         <table className="border-collapse">
           <thead>
             <tr className="border-b border-default">
