@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   ActionOption,
   AlertItem,
+  Avatar,
   Banner,
   BerthTile,
   Button,
@@ -15,24 +16,31 @@ import {
   CompareCard,
   ConfirmDialog,
   DateRange,
+  DeductionRow,
   FilterChip,
   Header,
+  HistoryStep,
   IconCircle,
   InfoChip,
   Input,
+  KpiCard,
   LayerToggle,
   LegendItem,
+  MapMarker,
+  NotificationPanel,
   PageTitle,
   Progress,
   PropertyRow,
   ScheduleBlock,
   SelectField,
   StatTile,
+  Tab,
   TableCell,
   TableHeaderCell,
   TableVesselCell,
   TextField,
   TimelineBar,
+  TimeSlider,
   Toast,
   Toggle,
   Tooltip,
@@ -230,8 +238,30 @@ export default function DesignSystemPage() {
           avatarIcon={<PlaceholderIcon />}
           userName="REVLIS"
         />
+        <Header
+          tabs={["도착 권고", "항해 현황", "수신 이력"]}
+          active="도착 권고"
+          showSearch={false}
+          logoIcon={<PlaceholderIcon />}
+          notificationsIcon={<PlaceholderIcon />}
+          avatarIcon={<PlaceholderIcon />}
+          userName="HANBIT PIONEER"
+          userRole="선교 · 당직 항해사"
+        />
+        <Avatar icon={<PlaceholderIcon />} />
         <PageTitle title="페이지 제목" subtitle="설명 문구" />
         <CardHeader title="카드 제목" badge={<Chip>8건</Chip>} />
+        <div className="flex max-w-100 flex-col">
+          <HistoryStep time="14:18" title="권고 생성" description="JIT 엔진 · 12.4 → 11.6 kn" />
+          <HistoryStep time="14:20" title="관제사 승인" description="REVLIS" />
+          <HistoryStep time="14:27" title="선박 수신" description="이 화면" />
+          <HistoryStep
+            done={false}
+            time="14:37"
+            title="응답 기한"
+            description="응답이 없으면 VHF로 재안내합니다"
+          />
+        </div>
         <table className="border-collapse">
           <thead>
             <tr className="border-b border-default">
@@ -311,6 +341,13 @@ export default function DesignSystemPage() {
           <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
           <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
         </div>
+        <TimeSlider
+          progress={55}
+          labels={["-2h", "지금", "+2h", "+4h", "+6h"]}
+          current="지금 14:35"
+          playIcon={<PlaceholderIcon />}
+          className="w-160"
+        />
         <div className="flex flex-wrap items-start gap-4">
           <CompareCard
             title="현재 속도 유지"
@@ -332,6 +369,12 @@ export default function DesignSystemPage() {
             className="w-80"
           />
         </div>
+        <DeductionRow
+          reason="AIS·레이더 위치 불일치"
+          detail="1.8 NM 차이 · 20:27"
+          points="-30"
+          className="max-w-110"
+        />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -367,6 +410,17 @@ export default function DesignSystemPage() {
           <Checkbox checked={false} />
           <LayerToggle checked label="항적" />
           <LayerToggle checked={false} label="항적" />
+        </div>
+        <div className="flex items-center gap-1 rounded-md bg-page p-1.5">
+          <Tab active>전체</Tab>
+          <Tab>입항</Tab>
+          <Tab>출항</Tab>
+        </div>
+        <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
+          <MapMarker status="항해 중" />
+          <MapMarker status="대기 예상" />
+          <MapMarker status="묘박" />
+          <MapMarker status="검증 필요" />
         </div>
         <div className="flex flex-wrap items-center gap-4">
           <LegendItem status="항해 중" label="항해 중" />
@@ -431,6 +485,25 @@ export default function DesignSystemPage() {
           <StatTile label="지표" value="12" unit="건" tone="warning" progress={40} />
           <StatTile label="지표" value="3" unit="건" tone="error" progress={15} />
         </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <KpiCard
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
+          <KpiCard
+            hero
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
+        </div>
         <Progress tone="brand" value={60} className="w-40" />
         <div className="flex max-w-100 flex-col">
           <AlertItem
@@ -494,6 +567,46 @@ export default function DesignSystemPage() {
           title="권고를 전송할까요?"
           description="설명 문구"
           className="w-110"
+        />
+        <NotificationPanel
+          unreadCount={4}
+          tabs={["전체", "조치 필요 3", "선박 응답 4"]}
+          activeTab="전체"
+          groups={[
+            {
+              label: "지금",
+              items: [
+                {
+                  id: "1",
+                  tone: "warning",
+                  unread: true,
+                  title: "BADA LINK가 조정을 요청했어요",
+                  description: "10.8 kn 권고 → 12.0 kn 요청 · 선박 응답에서 확인",
+                  time: "14:33",
+                },
+                {
+                  id: "2",
+                  tone: "error",
+                  unread: true,
+                  title: "SEOHAE STAR 권고 자동 보류",
+                  description: "신뢰도 32점 · 위치 검증이 필요해요",
+                  time: "14:32",
+                },
+              ],
+            },
+            {
+              label: "오늘",
+              items: [
+                {
+                  id: "3",
+                  tone: "neutral",
+                  title: "BLUE WAVE 미응답",
+                  description: "VHF로 재안내했어요",
+                  time: "10:12",
+                },
+              ],
+            },
+          ]}
         />
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
