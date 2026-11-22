@@ -4,6 +4,7 @@ import {
   ActionOption,
   AlertItem,
   Banner,
+  BerthTile,
   Button,
   Card,
   CardDescription,
@@ -19,6 +20,7 @@ import {
   Input,
   PageTitle,
   Progress,
+  PropertyRow,
   ScheduleBlock,
   SelectField,
   StatTile,
@@ -251,6 +253,20 @@ export default function DesignSystemPage() {
             </tr>
           </tbody>
         </table>
+        <div className="flex flex-wrap items-start gap-3">
+          <BerthTile berth="3부두 B1" state="하역 중" meta="~15:30 · 82%" progress={82} />
+          <BerthTile
+            status="delayed"
+            berth="3부두 B1"
+            state="하역 중"
+            meta="~15:30 · 82%"
+            progress={82}
+          />
+        </div>
+        <div className="flex flex-col gap-2">
+          <PropertyRow label="항목" value="값" />
+          <PropertyRow label="흘수" value="12.1m" />
+        </div>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>

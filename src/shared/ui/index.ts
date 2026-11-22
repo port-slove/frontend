@@ -1,6 +1,7 @@
 export { ActionOption, type ActionOptionProps } from "./action-option";
 export { AlertItem, type AlertItemProps } from "./alert-item";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
+export { BerthTile, type BerthTileProps } from "./berth-tile";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
@@ -14,6 +15,7 @@ export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
+export { PropertyRow, type PropertyRowProps } from "./property-row";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
