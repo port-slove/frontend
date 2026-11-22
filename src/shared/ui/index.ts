@@ -1,3 +1,4 @@
+export { ActionOption, type ActionOptionProps } from "./action-option";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
 export { Chip, type ChipProps, type ChipTone } from "./chip";

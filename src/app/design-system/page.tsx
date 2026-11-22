@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import {
+  ActionOption,
   Button,
   Card,
   CardDescription,
@@ -266,6 +267,19 @@ export default function DesignSystemPage() {
             time="16:30 – 08:00"
             name="HANBIT PIONEER"
             meta="HBP2611 · 컨테이너"
+          />
+        </div>
+        <div className="flex max-w-110 flex-col gap-3">
+          <ActionOption
+            icon={<PlaceholderIcon />}
+            title="VTS 무선 확인 요청"
+            description="선박에 위치 재확인을 요청합니다"
+          />
+          <ActionOption
+            selected
+            icon={<PlaceholderIcon />}
+            title="VTS 무선 확인 요청"
+            description="선박에 위치 재확인을 요청합니다"
           />
         </div>
         <Card className="w-90">
