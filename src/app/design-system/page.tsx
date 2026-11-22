@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 
 import {
+  ActionOption,
   Button,
   Card,
   CardDescription,
@@ -228,6 +229,19 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+        </div>
+        <div className="flex max-w-110 flex-col gap-3">
+          <ActionOption
+            icon={<PlaceholderIcon />}
+            title="VTS 무선 확인 요청"
+            description="선박에 위치 재확인을 요청합니다"
+          />
+          <ActionOption
+            selected
+            icon={<PlaceholderIcon />}
+            title="VTS 무선 확인 요청"
+            description="선박에 위치 재확인을 요청합니다"
+          />
         </div>
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
