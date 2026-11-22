@@ -32,6 +32,7 @@ import {
   TableVesselCell,
   TextField,
   TimelineBar,
+  TimeSlider,
   Toast,
   Toggle,
   Tooltip,
@@ -310,6 +311,13 @@ export default function DesignSystemPage() {
           <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
           <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
         </div>
+        <TimeSlider
+          progress={55}
+          labels={["-2h", "지금", "+2h", "+4h", "+6h"]}
+          current="지금 14:35"
+          playIcon={<PlaceholderIcon />}
+          className="w-160"
+        />
         <div className="flex flex-wrap items-start gap-4">
           <CompareCard
             title="현재 속도 유지"
