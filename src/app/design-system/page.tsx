@@ -21,13 +21,16 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  KpiCard,
   LayerToggle,
+  NotificationPanel,
   PageTitle,
   Progress,
   PropertyRow,
   ScheduleBlock,
   SelectField,
   StatTile,
+  Tab,
   TableCell,
   TableHeaderCell,
   TableVesselCell,
@@ -379,6 +382,11 @@ export default function DesignSystemPage() {
           <LayerToggle checked label="항적" />
           <LayerToggle checked={false} label="항적" />
         </div>
+        <div className="flex items-center gap-1 rounded-md bg-page p-1.5">
+          <Tab active>전체</Tab>
+          <Tab>입항</Tab>
+          <Tab>출항</Tab>
+        </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
             status="하역 중"
@@ -435,6 +443,25 @@ export default function DesignSystemPage() {
           <StatTile label="지표" value="96" unit="%" tone="success" progress={85} />
           <StatTile label="지표" value="12" unit="건" tone="warning" progress={40} />
           <StatTile label="지표" value="3" unit="건" tone="error" progress={15} />
+        </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <KpiCard
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
+          <KpiCard
+            hero
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
         </div>
         <Progress tone="brand" value={60} className="w-40" />
         <div className="flex max-w-100 flex-col">
@@ -499,6 +526,46 @@ export default function DesignSystemPage() {
           title="권고를 전송할까요?"
           description="설명 문구"
           className="w-110"
+        />
+        <NotificationPanel
+          unreadCount={4}
+          tabs={["전체", "조치 필요 3", "선박 응답 4"]}
+          activeTab="전체"
+          groups={[
+            {
+              label: "지금",
+              items: [
+                {
+                  id: "1",
+                  tone: "warning",
+                  unread: true,
+                  title: "BADA LINK가 조정을 요청했어요",
+                  description: "10.8 kn 권고 → 12.0 kn 요청 · 선박 응답에서 확인",
+                  time: "14:33",
+                },
+                {
+                  id: "2",
+                  tone: "error",
+                  unread: true,
+                  title: "SEOHAE STAR 권고 자동 보류",
+                  description: "신뢰도 32점 · 위치 검증이 필요해요",
+                  time: "14:32",
+                },
+              ],
+            },
+            {
+              label: "오늘",
+              items: [
+                {
+                  id: "3",
+                  tone: "neutral",
+                  title: "BLUE WAVE 미응답",
+                  description: "VHF로 재안내했어요",
+                  time: "10:12",
+                },
+              ],
+            },
+          ]}
         />
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>

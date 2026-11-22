@@ -16,13 +16,25 @@ export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header"
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
+export { KpiCard, type KpiCardProps } from "./kpi-card";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
+export {
+  NotificationItem,
+  type NotificationItemProps,
+  type NotificationTone,
+} from "./notification-item";
+export {
+  NotificationPanel,
+  type NotificationGroup,
+  type NotificationPanelProps,
+} from "./notification-panel";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
+export { Tab, type TabProps } from "./tab";
 export { TableCell, type TableCellProps, type TableCellType } from "./table-cell";
 export { TableHeaderCell, type TableHeaderCellProps } from "./table-header-cell";
 export { TableVesselCell, type TableVesselCellProps } from "./table-vessel-cell";
