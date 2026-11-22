@@ -1,5 +1,6 @@
 export { ActionOption, type ActionOptionProps } from "./action-option";
 export { AlertItem, type AlertItemProps } from "./alert-item";
+export { Avatar, type AvatarProps } from "./avatar";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { BerthTile, type BerthTileProps } from "./berth-tile";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
