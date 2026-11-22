@@ -1,5 +1,5 @@
-export { Badge, type BadgeProps, type BadgeTone } from "./badge";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
-export { Chip } from "./chip";
+export { Chip, type ChipProps, type ChipTone } from "./chip";
+export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
