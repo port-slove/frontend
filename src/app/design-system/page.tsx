@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   ActionOption,
   AlertItem,
+  Avatar,
   Banner,
   BerthTile,
   Button,
@@ -229,6 +230,17 @@ export default function DesignSystemPage() {
           avatarIcon={<PlaceholderIcon />}
           userName="REVLIS"
         />
+        <Header
+          tabs={["도착 권고", "항해 현황", "수신 이력"]}
+          active="도착 권고"
+          showSearch={false}
+          logoIcon={<PlaceholderIcon />}
+          notificationsIcon={<PlaceholderIcon />}
+          avatarIcon={<PlaceholderIcon />}
+          userName="HANBIT PIONEER"
+          userRole="선교 · 당직 항해사"
+        />
+        <Avatar icon={<PlaceholderIcon />} />
         <PageTitle title="페이지 제목" subtitle="설명 문구" />
         <CardHeader title="카드 제목" badge={<Chip>8건</Chip>} />
         <table className="border-collapse">
