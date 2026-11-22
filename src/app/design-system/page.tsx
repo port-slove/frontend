@@ -22,6 +22,9 @@ import {
   ScheduleBlock,
   SelectField,
   StatTile,
+  TableCell,
+  TableHeaderCell,
+  TableVesselCell,
   Toast,
   Toggle,
 } from "@/shared/ui";
@@ -219,6 +222,35 @@ export default function DesignSystemPage() {
         />
         <PageTitle title="페이지 제목" subtitle="설명 문구" />
         <CardHeader title="카드 제목" badge={<Chip>8건</Chip>} />
+        <table className="border-collapse">
+          <thead>
+            <tr className="border-b border-default">
+              <TableHeaderCell>선박</TableHeaderCell>
+              <TableHeaderCell align="center">상태</TableHeaderCell>
+              <TableHeaderCell align="center">흘수</TableHeaderCell>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="border-b border-default">
+              <TableVesselCell name="HANBIT PIONEER" imo="IMO 1234561" />
+              <TableCell type="strong" align="center">
+                접안 중
+              </TableCell>
+              <TableCell type="text" align="center">
+                12.1m
+              </TableCell>
+            </tr>
+            <tr>
+              <TableVesselCell name="GEUMJEONG 7" imo="IMO 1234562" />
+              <TableCell type="muted" align="center">
+                대기
+              </TableCell>
+              <TableCell type="muted" align="center">
+                -
+              </TableCell>
+            </tr>
+          </tbody>
+        </table>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
