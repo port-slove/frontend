@@ -11,6 +11,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  ScheduleBlock,
   SelectField,
   Toggle,
 } from "@/shared/ui";
@@ -228,6 +229,44 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+        </div>
+        <div className="flex flex-wrap items-start gap-3">
+          <ScheduleBlock
+            status="하역 중"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
+          <ScheduleBlock
+            status="접안 예정"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
+          <ScheduleBlock
+            status="대기 예상"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
+          <ScheduleBlock
+            status="지연"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
+          <ScheduleBlock
+            status="보류"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
+          <ScheduleBlock
+            status="추천"
+            time="16:30 – 08:00"
+            name="HANBIT PIONEER"
+            meta="HBP2611 · 컨테이너"
+          />
         </div>
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
