@@ -42,6 +42,8 @@ src/
     api/client.ts            # axios 인스턴스(apiClient), ApiError
     api/query-client.ts      # getQueryClient()
     config/env.ts            # 환경변수 접근은 여기서만
+    lib/cn.ts                # className 병합 (clsx + tailwind-merge)
+    ui/                      # 디자인 시스템 기본 컴포넌트 (Button, Input, Card, Chip, Badge)
 ```
 
 - 역할 전용 화면은 해당 route group 안에만 둡니다. 두 역할이 함께 쓰는 코드는 `shared/`로 올립니다.
@@ -86,10 +88,28 @@ src/
 - 타입만 가져올 때는 `import type` / `{ type X }`를 사용합니다.
 - 사용하지 않는 변수/인자는 `_` 접두사를 붙입니다.
 
-### 스타일
+### 스타일 · 디자인 시스템
 
-- Tailwind 유틸리티 클래스를 사용합니다. 클래스 순서는 Prettier 플러그인이 정렬하므로 신경 쓰지 않아도 됩니다.
-- 색상, 폰트 같은 디자인 토큰은 `globals.css`의 `@theme`에 추가하고 임의 값(`bg-[#123456]`)은 피합니다.
+출처: Figma `포포-UI-UX` › `포포 디자인 시스템` (node `204:40`). 토큰 정의는 `src/app/globals.css`의 `@theme` 한 곳에만 있습니다.
+
+- **Tailwind 기본 팔레트·글자 크기·라운드·그림자는 제거했습니다.** `text-sm`, `font-bold`, `bg-blue-500`(기본 팔레트 값), `rounded-2xl`(기본 값) 같은 기본 클래스를 쓰지 말고 아래 토큰만 사용합니다.
+- 색상은 **의미(semantic) 토큰을 먼저** 쓰고, 맞는 게 없을 때만 원시 팔레트(`blue-600`, `gray-200` 등)를 씁니다.
+
+  | 용도   | 클래스                                                                                 |
+  | ------ | -------------------------------------------------------------------------------------- |
+  | 브랜드 | `bg-brand` `bg-brand-sub` `bg-brand-pressed` `bg-brand-subtle` `text-brand`            |
+  | 배경   | `bg-page` `bg-surface` `bg-surface-muted` `bg-inverse` `bg-disabled`                   |
+  | 텍스트 | `text-primary` `text-secondary` `text-tertiary` `text-on-brand` `text-disabled`        |
+  | 테두리 | `border-default` (`border-brand`, `border-error` 등 색 토큰도 가능)                    |
+  | 상태   | `success` `error` `warning` + 배경용 `*-subtle` (예: `bg-success-subtle text-success`) |
+
+- 타이포그래피는 크기·행간·자간·굵기가 한 클래스에 묶여 있으므로 `font-*`를 따로 붙이지 않습니다.
+  `text-display-lg` `text-display-md` `text-h1`~`text-h4` `text-body-lg/md/sm` `text-caption-md/sm` `text-label-lg/md/sm`
+- 간격은 4pt 그리드 = Tailwind 기본 spacing (`p-1`=4px … `p-20`=80px). `p-[13px]` 같은 임의 값은 쓰지 않습니다.
+- 라운드 `rounded-{none,xs,sm,md,lg,xl,2xl,3xl,full}`, 그림자 `shadow-{xs,sm,md,lg,xl}`(블루 틴트), 글래스 `backdrop-blur-glass`.
+- UI를 만들 때는 먼저 `@/shared/ui`의 컴포넌트를 재사용합니다. 클래스를 덧붙일 때는 `cn()`을 사용합니다(토큰 충돌을 올바르게 병합).
+- 토큰을 추가하면 `src/shared/lib/cn.ts`의 tailwind-merge 설정과 `/design-system` 미리보기 페이지(개발 환경 전용)도 함께 갱신합니다.
+- 다크 모드는 아직 정의되지 않았습니다(Figma 변수가 Light 한 가지).
 
 ### 환경변수
 
@@ -113,3 +133,13 @@ src/
 - ESLint 규칙을 `eslint-disable`로 끄기 (불가피하면 사유 주석 필수)
 - 생성 파일 수정: `next-env.d.ts`, `.next/`, `pnpm-lock.yaml` 직접 편집
 - 백엔드 API가 없다는 이유로 목(mock) 데이터를 실제 코드 경로에 하드코딩하기
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+## This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

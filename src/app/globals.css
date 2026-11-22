@@ -1,26 +1,202 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * 포포 디자인 시스템 토큰
+ * Figma: 포포-UI-UX / 포포 디자인 시스템 (node 204:40)
+ *
+ * Tailwind 기본 팔레트·라운드·그림자·글자 크기는 지우고 디자인 시스템 값만 남깁니다.
+ * 간격은 Tailwind 기본값(--spacing: 4px)이 4pt 그리드와 같으므로 그대로 씁니다.
+ *   space/1 = p-1(4px), space/2 = p-2(8px) ... space/20 = p-20(80px)
+ */
+@theme {
+  --color-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --text-*: initial;
+
+  /* ── Font ───────────────────────────────────────── */
+  --font-sans:
+    var(--font-pretendard), "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
+    system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+
+  /* ── Primitive palette ──────────────────────────── */
+  --color-white: #ffffff;
+  --color-black: #16181e;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --color-blue-50: #f2f8ff;
+  --color-blue-100: #e5f1ff;
+  --color-blue-200: #cce5ff;
+  --color-blue-300: #a8d2ff;
+  --color-blue-400: #7bb6ff;
+  --color-blue-500: #4e98f8;
+  --color-blue-600: #2d7bf3;
+  --color-blue-700: #1f62d1;
+  --color-blue-800: #194da3;
+  --color-blue-900: #133b7d;
+
+  --color-gray-0: #ffffff;
+  --color-gray-50: #f4f6fa;
+  --color-gray-100: #eaeef4;
+  --color-gray-200: #d9dfe9;
+  --color-gray-300: #bfc7d5;
+  --color-gray-400: #9aa3b5;
+  --color-gray-500: #76809a;
+  --color-gray-600: #59627a;
+  --color-gray-700: #3f475c;
+  --color-gray-800: #2a3042;
+  --color-gray-900: #16181e;
+
+  --color-green-50: #eafaf1;
+  --color-green-100: #c9f2da;
+  --color-green-300: #6adb9b;
+  --color-green-500: #22c55e;
+  --color-green-700: #15803d;
+
+  --color-red-50: #fff0f0;
+  --color-red-100: #ffd9d9;
+  --color-red-300: #ff9b9b;
+  --color-red-500: #f04452;
+  --color-red-700: #b42333;
+
+  --color-yellow-50: #fff8e6;
+  --color-yellow-100: #ffedb8;
+  --color-yellow-300: #ffd166;
+  --color-yellow-500: #f5a623;
+  --color-yellow-700: #a86a00;
+
+  /* ── Semantic: brand / state (모든 색 유틸리티) ────── */
+  --color-brand: var(--color-blue-600); /* brand/main */
+  --color-brand-sub: var(--color-blue-200); /* brand/sub */
+  --color-brand-pressed: var(--color-blue-700); /* brand/pressed */
+  --color-brand-subtle: var(--color-blue-50); /* brand/subtle */
+
+  --color-success: var(--color-green-500); /* state/success */
+  --color-success-subtle: var(--color-green-50); /* state/success-bg */
+  --color-error: var(--color-red-500); /* state/error */
+  --color-error-subtle: var(--color-red-50);
+  --color-warning: var(--color-yellow-500); /* state/warning */
+  --color-warning-subtle: var(--color-yellow-50);
+
+  /* ── Semantic: background (bg-*) ─────────────────── */
+  --background-color-page: var(--color-gray-50); /* bg/page */
+  --background-color-surface: var(--color-white); /* bg/surface */
+  --background-color-surface-muted: var(--color-gray-100); /* bg/surface-muted */
+  --background-color-inverse: var(--color-gray-900); /* bg/inverse */
+  --background-color-disabled: var(--color-gray-100); /* state/disabled-bg */
+
+  /* ── Semantic: text (text-*) ─────────────────────── */
+  --text-color-primary: var(--color-gray-900); /* text/primary */
+  --text-color-secondary: var(--color-gray-600); /* text/secondary */
+  --text-color-tertiary: var(--color-gray-400); /* text/tertiary */
+  --text-color-on-brand: var(--color-white); /* text/on-brand */
+  --text-color-disabled: var(--color-gray-300); /* state/disabled-text */
+
+  /* ── Semantic: border (border-*) ─────────────────── */
+  --border-color-default: var(--color-gray-200); /* border/default */
+
+  /* ── Typography (text-*) ─────────────────────────── */
+  /* Figma letterSpacing 은 % 단위 → em 으로 변환 */
+  --text-display-lg: 2.5rem;
+  --text-display-lg--line-height: 3.25rem;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-display-md: 2rem;
+  --text-display-md--line-height: 2.75rem;
+  --text-display-md--letter-spacing: -0.018em;
+  --text-display-md--font-weight: 700;
+
+  --text-h1: 1.75rem;
+  --text-h1--line-height: 2.375rem;
+  --text-h1--letter-spacing: -0.015em;
+  --text-h1--font-weight: 700;
+
+  --text-h2: 1.5rem;
+  --text-h2--line-height: 2.125rem;
+  --text-h2--letter-spacing: -0.012em;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1.25rem;
+  --text-h3--line-height: 1.75rem;
+  --text-h3--letter-spacing: -0.01em;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1rem;
+  --text-h4--line-height: 1.5rem;
+  --text-h4--letter-spacing: -0.006em;
+  --text-h4--font-weight: 600;
+
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.75rem;
+  --text-body-lg--letter-spacing: -0.005em;
+  --text-body-lg--font-weight: 500;
+
+  --text-body-md: 1rem;
+  --text-body-md--line-height: 1.5rem;
+  --text-body-md--letter-spacing: -0.003em;
+  --text-body-md--font-weight: 500;
+
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.375rem;
+  --text-body-sm--letter-spacing: 0em;
+  --text-body-sm--font-weight: 400;
+
+  --text-caption-md: 0.75rem;
+  --text-caption-md--line-height: 1.125rem;
+  --text-caption-md--letter-spacing: 0em;
+  --text-caption-md--font-weight: 500;
+
+  --text-caption-sm: 0.625rem;
+  --text-caption-sm--line-height: 0.875rem;
+  --text-caption-sm--letter-spacing: 0em;
+  --text-caption-sm--font-weight: 400;
+
+  --text-label-lg: 1rem;
+  --text-label-lg--line-height: 1.25rem;
+  --text-label-lg--letter-spacing: -0.003em;
+  --text-label-lg--font-weight: 600;
+
+  --text-label-md: 0.875rem;
+  --text-label-md--line-height: 1.125rem;
+  --text-label-md--letter-spacing: 0em;
+  --text-label-md--font-weight: 600;
+
+  --text-label-sm: 0.75rem;
+  --text-label-sm--line-height: 1rem;
+  --text-label-sm--letter-spacing: 0em;
+  --text-label-sm--font-weight: 600;
+
+  /* ── Radius (rounded-*) ──────────────────────────── */
+  /* Figma 변수 값 기준. 문서 텍스트(sm 8 / md 12 ...)와 다름 → AGENTS.md 참고 */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 8px;
+  --radius-2xl: 12px;
+  --radius-3xl: 20px;
+  --radius-full: 999px;
+
+  /* ── Shadow (shadow-*) : 블루 틴트 소프트 섀도 ────── */
+  --shadow-xs: 0 1px 2px 0 rgb(45 123 243 / 0.06);
+  --shadow-sm: 0 2px 8px 0 rgb(45 123 243 / 0.08);
+  --shadow-md: 0 8px 24px 0 rgb(45 123 243 / 0.1);
+  --shadow-lg: 0 16px 40px 0 rgb(45 123 243 / 0.14);
+  --shadow-xl: 0 24px 64px 0 rgb(45 123 243 / 0.18);
+
+  /* ── Glass (backdrop-blur-glass) ─────────────────── */
+  --blur-glass: 24px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-page font-sans text-body-md text-primary antialiased;
+  }
 }
