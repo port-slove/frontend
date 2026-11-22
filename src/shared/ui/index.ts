@@ -5,6 +5,7 @@ export { BerthTile, type BerthTileProps } from "./berth-tile";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
+export { Checkbox, type CheckboxProps } from "./checkbox";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
 export { ConfirmDialog, type ConfirmDialogProps } from "./confirm-dialog";
 export { DateRange, type DateRangeProps } from "./date-range";
@@ -13,6 +14,7 @@ export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header"
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
+export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";
