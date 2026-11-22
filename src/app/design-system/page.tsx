@@ -13,6 +13,7 @@ import {
   Chip,
   ConfirmDialog,
   DateRange,
+  DeductionRow,
   FilterChip,
   Header,
   IconCircle,
@@ -283,6 +284,12 @@ export default function DesignSystemPage() {
             { label: "출항 예정", value: "11.08 08:00" },
             { label: "권고 속도", value: "13.6 → 11.6 kn" },
           ]}
+        />
+        <DeductionRow
+          reason="AIS·레이더 위치 불일치"
+          detail="1.8 NM 차이 · 20:27"
+          points="-30"
+          className="max-w-110"
         />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
