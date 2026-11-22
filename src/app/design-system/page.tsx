@@ -10,7 +10,9 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  Checkbox,
   Chip,
+  CompareCard,
   ConfirmDialog,
   DateRange,
   FilterChip,
@@ -18,6 +20,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  LayerToggle,
   MapMarker,
   PageTitle,
   Progress,
@@ -29,6 +32,7 @@ import {
   TableHeaderCell,
   TableVesselCell,
   TextField,
+  TimelineBar,
   Toast,
   Toggle,
   Tooltip,
@@ -285,6 +289,49 @@ export default function DesignSystemPage() {
             { label: "권고 속도", value: "13.6 → 11.6 kn" },
           ]}
         />
+        <div className="flex flex-wrap items-start gap-3">
+          <TimelineBar
+            status="하역 중"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="접안 예정"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="대기 예상"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+          <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+        </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <CompareCard
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
+          <CompareCard
+            recommended
+            title="현재 속도 유지"
+            speed="13.6"
+            arrival="14:10"
+            wait="2시간 20분"
+            fuel="18.4 t"
+            co2="57.3 tCO₂"
+            className="w-80"
+          />
+        </div>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
@@ -316,6 +363,10 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+          <Checkbox checked />
+          <Checkbox checked={false} />
+          <LayerToggle checked label="항적" />
+          <LayerToggle checked={false} label="항적" />
         </div>
         <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
           <MapMarker status="항해 중" />
