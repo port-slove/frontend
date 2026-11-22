@@ -9,6 +9,7 @@ import {
   Chip,
   DateRange,
   FilterChip,
+  Header,
   IconCircle,
   InfoChip,
   Input,
@@ -200,6 +201,14 @@ export default function DesignSystemPage() {
       </Section>
 
       <Section title="Components (base)">
+        <Header
+          active="선석 스케줄"
+          logoIcon={<PlaceholderIcon />}
+          searchIcon={<PlaceholderIcon />}
+          notificationsIcon={<PlaceholderIcon />}
+          avatarIcon={<PlaceholderIcon />}
+          userName="REVLIS"
+        />
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
