@@ -13,6 +13,7 @@ export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header"
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
+export { MapMarker, type MapMarkerProps, type MapMarkerStatus } from "./map-marker";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";

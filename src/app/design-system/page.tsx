@@ -18,6 +18,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  MapMarker,
   PageTitle,
   Progress,
   PropertyRow,
@@ -315,6 +316,12 @@ export default function DesignSystemPage() {
           <IconCircle tone="dark" icon={<PlaceholderIcon />} />
           <Toggle checked />
           <Toggle checked={false} />
+        </div>
+        <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
+          <MapMarker status="항해 중" />
+          <MapMarker status="대기 예상" />
+          <MapMarker status="묘박" />
+          <MapMarker status="검증 필요" />
         </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock

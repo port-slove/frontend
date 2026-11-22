@@ -1,0 +1,30 @@
+import type { ComponentProps } from "react";
+
+import { cn } from "@/shared/lib/cn";
+
+export type MapMarkerStatus = "항해 중" | "대기 예상" | "묘박" | "검증 필요";
+
+export interface MapMarkerProps extends ComponentProps<"div"> {
+  status?: MapMarkerStatus;
+}
+
+export function MapMarker({ status = "항해 중", className, ...props }: MapMarkerProps) {
+  return (
+    <div className={cn("flex size-6 shrink-0 items-center justify-center", className)} {...props}>
+      {status === "항해 중" && (
+        <span className="size-4 rounded-full border-2 border-white bg-brand" />
+      )}
+      {status === "대기 예상" && (
+        <span className="size-4 rounded-full border-2 border-white bg-warning" />
+      )}
+      {status === "묘박" && (
+        <span className="bg-secondary size-3 rounded-xs border-2 border-white" />
+      )}
+      {status === "검증 필요" && (
+        <span className="flex size-4 rotate-45 items-center justify-center">
+          <span className="size-3 rounded-xs border-2 border-white bg-error" />
+        </span>
+      )}
+    </div>
+  );
+}
