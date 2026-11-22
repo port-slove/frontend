@@ -8,6 +8,8 @@ export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header"
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
+export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";
+export { StatTile, type StatTileProps } from "./stat-tile";
 export { Toggle, type ToggleProps } from "./toggle";

@@ -13,8 +13,10 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  Progress,
   ScheduleBlock,
   SelectField,
+  StatTile,
   Toggle,
 } from "@/shared/ui";
 
@@ -291,6 +293,13 @@ export default function DesignSystemPage() {
             description="선박에 위치 재확인을 요청합니다"
           />
         </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <StatTile label="지표" value="128" unit="척" tone="brand" progress={60} />
+          <StatTile label="지표" value="96" unit="%" tone="success" progress={85} />
+          <StatTile label="지표" value="12" unit="건" tone="warning" progress={40} />
+          <StatTile label="지표" value="3" unit="건" tone="error" progress={15} />
+        </div>
+        <Progress tone="brand" value={60} className="w-40" />
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
           <CardDescription>rounded xl, soft blue shadow, 24 padding</CardDescription>
