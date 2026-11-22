@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/shared/lib/cn";
 
@@ -9,6 +9,8 @@ export interface KpiCardProps extends ComponentProps<"div"> {
   unit?: string;
   delta?: string;
   sub?: string;
+  /** 라벨 오른쪽 아이콘 (예: 확인 필요 카드의 IconCircle) */
+  icon?: ReactNode;
 }
 
 export function KpiCard({
@@ -18,6 +20,7 @@ export function KpiCard({
   unit,
   delta,
   sub,
+  icon,
   className,
   ...props
 }: KpiCardProps) {
@@ -30,9 +33,12 @@ export function KpiCard({
       )}
       {...props}
     >
-      <p className={cn("text-body-sm whitespace-nowrap", hero ? "opacity-85" : "text-secondary")}>
-        {label}
-      </p>
+      <div className="flex w-full items-center justify-between">
+        <p className={cn("text-body-sm whitespace-nowrap", hero ? "opacity-85" : "text-secondary")}>
+          {label}
+        </p>
+        {icon}
+      </div>
       <div className="flex items-baseline gap-2 whitespace-nowrap">
         <p className={cn("text-display-md", !hero && "text-primary")}>{value}</p>
         {unit && <p className={cn("text-body-lg", !hero && "text-secondary")}>{unit}</p>}

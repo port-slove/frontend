@@ -3,8 +3,15 @@ export { AlertItem, type AlertItemProps } from "./alert-item";
 export { Avatar, type AvatarProps } from "./avatar";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { BerthTile, type BerthTileProps } from "./berth-tile";
-export { Button, type ButtonProps, type ButtonVariant } from "./button";
-export { Card, CardDescription, CardTitle } from "./card";
+export {
+  Button,
+  type ButtonClassOptions,
+  buttonClassName,
+  type ButtonProps,
+  type ButtonSize,
+  type ButtonVariant,
+} from "./button";
+export { Card, CardDescription, type CardProps, CardTitle, type CardVariant } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
 export { Checkbox, type CheckboxProps } from "./checkbox";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
@@ -20,6 +27,12 @@ export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
 export { KpiCard, type KpiCardProps } from "./kpi-card";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
+export {
+  MAP_MARKER_STATUSES,
+  MapMarker,
+  type MapMarkerProps,
+  type MapMarkerStatus,
+} from "./map-marker";
 export {
   NotificationItem,
   type NotificationItemProps,
