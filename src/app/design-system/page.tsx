@@ -1,6 +1,25 @@
 import { notFound } from "next/navigation";
 
-import { Badge, Button, Card, CardDescription, CardTitle, Chip, Input } from "@/shared/ui";
+import {
+  Button,
+  Card,
+  CardDescription,
+  CardTitle,
+  Chip,
+  IconCircle,
+  InfoChip,
+  Input,
+  Toggle,
+} from "@/shared/ui";
+
+// 아이콘 시스템 도입 전 미리보기 전용 placeholder (실제 컴포넌트는 아이콘을 prop으로 전달받음)
+function PlaceholderIcon() {
+  return (
+    <svg viewBox="0 0 20 20" fill="none" className="size-5">
+      <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="2" />
+    </svg>
+  );
+}
 
 // 개발용 토큰/컴포넌트 미리보기 페이지. 프로덕션 빌드에서는 404.
 const palettes = {
@@ -180,12 +199,29 @@ export default function DesignSystemPage() {
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>
           <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="danger">Danger</Button>
+          <Button variant="dark">Dark</Button>
           <Button disabled>Disabled</Button>
-          <Chip>Chip</Chip>
-          <Badge>Success</Badge>
-          <Badge tone="error">Error</Badge>
-          <Badge tone="warning">Warning</Badge>
+          <Chip>Neutral</Chip>
+          <Chip tone="brand">Brand</Chip>
+          <Chip tone="success">Success</Chip>
+          <Chip tone="warning">Warning</Chip>
+          <Chip tone="error">Error</Chip>
+          <Chip tone="dark">Dark</Chip>
+          <InfoChip label="풍속" value="4.2 m/s" />
           <Input className="w-70" placeholder="Placeholder" />
+        </div>
+        <div className="flex flex-wrap items-center gap-6">
+          <IconCircle tone="brand" icon={<PlaceholderIcon />} />
+          <IconCircle tone="neutral" icon={<PlaceholderIcon />} />
+          <IconCircle tone="error" icon={<PlaceholderIcon />} />
+          <IconCircle tone="warning" icon={<PlaceholderIcon />} />
+          <IconCircle tone="success" icon={<PlaceholderIcon />} />
+          <IconCircle tone="white" icon={<PlaceholderIcon />} />
+          <IconCircle tone="dark" icon={<PlaceholderIcon />} />
+          <Toggle checked />
+          <Toggle checked={false} />
         </div>
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
