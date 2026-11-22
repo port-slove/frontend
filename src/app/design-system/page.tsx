@@ -25,6 +25,7 @@ import {
   Input,
   KpiCard,
   LayerToggle,
+  MapMarker,
   NotificationPanel,
   PageTitle,
   Progress,
@@ -413,6 +414,12 @@ export default function DesignSystemPage() {
           <Tab active>전체</Tab>
           <Tab>입항</Tab>
           <Tab>출항</Tab>
+        </div>
+        <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
+          <MapMarker status="항해 중" />
+          <MapMarker status="대기 예상" />
+          <MapMarker status="묘박" />
+          <MapMarker status="검증 필요" />
         </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
