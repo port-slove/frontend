@@ -1,4 +1,5 @@
 export { ActionOption, type ActionOptionProps } from "./action-option";
+export { AlertItem, type AlertItemProps } from "./alert-item";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { Button, type ButtonProps, type ButtonVariant } from "./button";
 export { Card, CardDescription, CardTitle } from "./card";

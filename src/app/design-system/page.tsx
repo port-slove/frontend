@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 
 import {
   ActionOption,
+  AlertItem,
   Banner,
   Button,
   Card,
@@ -303,6 +304,29 @@ export default function DesignSystemPage() {
           <StatTile label="지표" value="3" unit="건" tone="error" progress={15} />
         </div>
         <Progress tone="brand" value={60} className="w-40" />
+        <div className="flex max-w-100 flex-col">
+          <AlertItem
+            severity="error"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            meta="선박명 IMO 0000000"
+            time="00:00"
+          />
+          <AlertItem
+            severity="warning"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            meta="선박명 IMO 0000000"
+            time="00:00"
+          />
+          <AlertItem
+            severity="success"
+            icon={<PlaceholderIcon />}
+            title="알림 제목"
+            meta="선박명 IMO 0000000"
+            time="00:00"
+          />
+        </div>
         <div className="flex max-w-160 flex-col gap-3">
           <Banner tone="error" icon={<PlaceholderIcon />} title="배너 제목" description="설명" />
           <Banner tone="warning" icon={<PlaceholderIcon />} title="배너 제목" description="설명" />
