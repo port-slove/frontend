@@ -23,6 +23,7 @@ export { PropertyRow, type PropertyRowProps } from "./property-row";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
+export { Tab, type TabProps } from "./tab";
 export { TableCell, type TableCellProps, type TableCellType } from "./table-cell";
 export { TableHeaderCell, type TableHeaderCellProps } from "./table-header-cell";
 export { TableVesselCell, type TableVesselCellProps } from "./table-vessel-cell";

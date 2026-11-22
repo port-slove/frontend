@@ -28,6 +28,7 @@ import {
   ScheduleBlock,
   SelectField,
   StatTile,
+  Tab,
   TableCell,
   TableHeaderCell,
   TableVesselCell,
@@ -367,6 +368,11 @@ export default function DesignSystemPage() {
           <Checkbox checked={false} />
           <LayerToggle checked label="항적" />
           <LayerToggle checked={false} label="항적" />
+        </div>
+        <div className="flex items-center gap-1 rounded-md bg-page p-1.5">
+          <Tab active>전체</Tab>
+          <Tab>입항</Tab>
+          <Tab>출항</Tab>
         </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
