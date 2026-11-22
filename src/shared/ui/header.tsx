@@ -3,6 +3,7 @@
 import type { ChangeEvent, ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/shared/lib/cn";
+import { Avatar } from "./avatar";
 
 export const HEADER_TABS = [
   "운영 현황",
@@ -15,9 +16,11 @@ export const HEADER_TABS = [
 export type HeaderTab = (typeof HEADER_TABS)[number];
 
 export interface HeaderProps extends Omit<ComponentProps<"header">, "onChange"> {
-  active: HeaderTab;
-  onNavigate?: (tab: HeaderTab) => void;
+  tabs?: readonly string[];
+  active: string;
+  onNavigate?: (tab: string) => void;
   logoIcon?: ReactNode;
+  showSearch?: boolean;
   searchValue?: string;
   onSearchChange?: (value: string) => void;
   searchIcon?: ReactNode;
@@ -25,12 +28,15 @@ export interface HeaderProps extends Omit<ComponentProps<"header">, "onChange"> 
   notificationsIcon?: ReactNode;
   avatarIcon?: ReactNode;
   userName: string;
+  userRole?: string;
 }
 
 export function Header({
+  tabs = HEADER_TABS,
   active,
   onNavigate,
   logoIcon,
+  showSearch = true,
   searchValue,
   onSearchChange,
   searchIcon,
@@ -38,6 +44,7 @@ export function Header({
   notificationsIcon,
   avatarIcon,
   userName,
+  userRole,
   className,
   ...props
 }: HeaderProps) {
@@ -57,7 +64,7 @@ export function Header({
       </div>
 
       <nav className="flex items-center gap-1 rounded-md p-1.5">
-        {HEADER_TABS.map((tab) => (
+        {tabs.map((tab) => (
           <button
             key={tab}
             type="button"
@@ -73,18 +80,20 @@ export function Header({
       </nav>
 
       <div className="flex items-center justify-end gap-3">
-        <label className="flex items-center gap-2 rounded-md bg-page px-4 py-2.5">
-          <span className="flex size-4.5 shrink-0 items-center justify-center text-tertiary">
-            {searchIcon}
-          </span>
-          <input
-            type="search"
-            value={searchValue}
-            onChange={(e: ChangeEvent<HTMLInputElement>) => onSearchChange?.(e.target.value)}
-            placeholder="선박명 검색"
-            className="w-36 bg-transparent text-body-sm text-primary placeholder:text-tertiary focus:outline-none"
-          />
-        </label>
+        {showSearch && (
+          <label className="flex items-center gap-2 rounded-md bg-page px-4 py-2.5">
+            <span className="flex size-4.5 shrink-0 items-center justify-center text-tertiary">
+              {searchIcon}
+            </span>
+            <input
+              type="search"
+              value={searchValue}
+              onChange={(e: ChangeEvent<HTMLInputElement>) => onSearchChange?.(e.target.value)}
+              placeholder="선박명 검색"
+              className="w-36 bg-transparent text-body-sm text-primary placeholder:text-tertiary focus:outline-none"
+            />
+          </label>
+        )}
         <button
           type="button"
           aria-label="알림"
@@ -93,10 +102,13 @@ export function Header({
         >
           {notificationsIcon}
         </button>
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-brand-sub [&_svg]:size-5">
-          {avatarIcon}
-        </span>
-        <p className="text-label-lg whitespace-nowrap text-primary">{userName}</p>
+        <Avatar icon={avatarIcon} />
+        <div className="flex flex-col items-start">
+          <p className="text-label-lg whitespace-nowrap text-primary">{userName}</p>
+          {userRole && (
+            <p className="text-caption-md whitespace-nowrap text-secondary">{userRole}</p>
+          )}
+        </div>
       </div>
     </header>
   );
