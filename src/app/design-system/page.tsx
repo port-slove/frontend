@@ -20,6 +20,7 @@ import {
   IconCircle,
   InfoChip,
   Input,
+  KpiCard,
   LayerToggle,
   PageTitle,
   Progress,
@@ -429,6 +430,25 @@ export default function DesignSystemPage() {
           <StatTile label="지표" value="96" unit="%" tone="success" progress={85} />
           <StatTile label="지표" value="12" unit="건" tone="warning" progress={40} />
           <StatTile label="지표" value="3" unit="건" tone="error" progress={15} />
+        </div>
+        <div className="flex flex-wrap items-start gap-4">
+          <KpiCard
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
+          <KpiCard
+            hero
+            label="지표명"
+            value="24"
+            unit="척"
+            delta="↑ 3"
+            sub="1시간 전 21"
+            className="w-85"
+          />
         </div>
         <Progress tone="brand" value={60} className="w-40" />
         <div className="flex max-w-100 flex-col">
