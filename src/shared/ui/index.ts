@@ -17,6 +17,16 @@ export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
 export { KpiCard, type KpiCardProps } from "./kpi-card";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
+export {
+  NotificationItem,
+  type NotificationItemProps,
+  type NotificationTone,
+} from "./notification-item";
+export {
+  NotificationPanel,
+  type NotificationGroup,
+  type NotificationPanelProps,
+} from "./notification-panel";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";

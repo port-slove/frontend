@@ -22,6 +22,7 @@ import {
   Input,
   KpiCard,
   LayerToggle,
+  NotificationPanel,
   PageTitle,
   Progress,
   PropertyRow,
@@ -513,6 +514,46 @@ export default function DesignSystemPage() {
           title="권고를 전송할까요?"
           description="설명 문구"
           className="w-110"
+        />
+        <NotificationPanel
+          unreadCount={4}
+          tabs={["전체", "조치 필요 3", "선박 응답 4"]}
+          activeTab="전체"
+          groups={[
+            {
+              label: "지금",
+              items: [
+                {
+                  id: "1",
+                  tone: "warning",
+                  unread: true,
+                  title: "BADA LINK가 조정을 요청했어요",
+                  description: "10.8 kn 권고 → 12.0 kn 요청 · 선박 응답에서 확인",
+                  time: "14:33",
+                },
+                {
+                  id: "2",
+                  tone: "error",
+                  unread: true,
+                  title: "SEOHAE STAR 권고 자동 보류",
+                  description: "신뢰도 32점 · 위치 검증이 필요해요",
+                  time: "14:32",
+                },
+              ],
+            },
+            {
+              label: "오늘",
+              items: [
+                {
+                  id: "3",
+                  tone: "neutral",
+                  title: "BLUE WAVE 미응답",
+                  description: "VHF로 재안내했어요",
+                  time: "10:12",
+                },
+              ],
+            },
+          ]}
         />
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
