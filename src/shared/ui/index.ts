@@ -14,6 +14,7 @@ export { DateRange, type DateRangeProps } from "./date-range";
 export { DeductionRow, type DeductionRowProps } from "./deduction-row";
 export { FilterChip, type FilterChipProps } from "./filter-chip";
 export { HEADER_TABS, Header, type HeaderProps, type HeaderTab } from "./header";
+export { HistoryStep, type HistoryStepProps } from "./history-step";
 export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-circle";
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
