@@ -7,6 +7,7 @@ import {
   CardTitle,
   Chip,
   DateRange,
+  FilterChip,
   IconCircle,
   InfoChip,
   Input,
@@ -213,6 +214,7 @@ export default function DesignSystemPage() {
           <Chip tone="dark">Dark</Chip>
           <InfoChip label="풍속" value="4.2 m/s" />
           <Input className="w-70" placeholder="Placeholder" />
+          <FilterChip field="상태" value="하역 중" />
           <DateRange range="2026.11.07 – 2026.11.09" />
           <SelectField value="전체" count="6/6" className="w-50" />
         </div>
