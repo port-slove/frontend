@@ -119,6 +119,8 @@ src/
 
 ## Git
 
+- 브랜치: `타입/#이슈번호` (예: `feat/#12`, `fix/#34`). 타입은 커밋 타입과 같습니다. 작업 전 이슈를 먼저 만듭니다.
+- PR 본문에는 `close #이슈번호`를 적어 머지 시 이슈가 닫히게 합니다. 템플릿: `.github/pull_request_template.md`
 - 커밋 메시지는 Conventional Commits 형식(commitlint로 검사): `타입(범위): 제목`
   - 타입: `feat` `fix` `refactor` `style` `docs` `test` `chore` `perf` `build` `ci` `revert`
   - 예: `feat(admin): 입항 신청 목록 조회`, `fix(captain): 입항 일시 포맷 오류 수정`
