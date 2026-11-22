@@ -28,6 +28,7 @@ import {
   TableHeaderCell,
   TableVesselCell,
   TextField,
+  TimelineBar,
   Toast,
   Toggle,
   Tooltip,
@@ -284,6 +285,28 @@ export default function DesignSystemPage() {
             { label: "권고 속도", value: "13.6 → 11.6 kn" },
           ]}
         />
+        <div className="flex flex-wrap items-start gap-3">
+          <TimelineBar
+            status="하역 중"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="접안 예정"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar
+            status="대기 예상"
+            label="HANBIT PIONEER"
+            meta="13:00 – 16:30"
+            className="w-50"
+          />
+          <TimelineBar status="지연" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+          <TimelineBar status="보류" label="HANBIT PIONEER" meta="13:00 – 16:30" className="w-50" />
+        </div>
         <div className="flex flex-wrap items-center gap-6">
           <Button>Primary</Button>
           <Button variant="secondary">Secondary</Button>

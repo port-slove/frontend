@@ -23,6 +23,7 @@ export { TableCell, type TableCellProps, type TableCellType } from "./table-cell
 export { TableHeaderCell, type TableHeaderCellProps } from "./table-header-cell";
 export { TableVesselCell, type TableVesselCellProps } from "./table-vessel-cell";
 export { TextField, type TextFieldProps } from "./text-field";
+export { TimelineBar, type TimelineBarProps, type TimelineBarStatus } from "./timeline-bar";
 export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";
 export { Tooltip, type TooltipProps } from "./tooltip";
