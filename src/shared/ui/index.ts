@@ -16,6 +16,8 @@ export { IconCircle, type IconCircleProps, type IconCircleTone } from "./icon-ci
 export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
+export { LegendItem, type LegendItemProps } from "./legend-item";
+export { MapMarker, type MapMarkerProps, type MapMarkerStatus } from "./map-marker";
 export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";
