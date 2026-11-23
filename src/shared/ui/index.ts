@@ -47,6 +47,7 @@ export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
+export { Segmented, type SegmentedProps } from "./segmented";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
 export { Tab, type TabProps } from "./tab";
@@ -65,10 +66,12 @@ export {
   ArrowRightIcon,
   BellIcon,
   ChevronDownIcon,
+  CollapseIcon,
   ExpandIcon,
   ExportIcon,
   type IconProps,
   LogoIcon,
+  MapIcon,
   SearchIcon,
   UserIcon,
   WarningIcon,

@@ -154,6 +154,41 @@ export function ExpandIcon(props: IconProps) {
   );
 }
 
+export function CollapseIcon(props: IconProps) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden {...props}>
+      <path
+        d="M5 5L10 10L5 15M10.8333 5L15.8333 10L10.8333 15"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function MapIcon(props: IconProps) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden {...props}>
+      <path
+        d="M6 2.66667L2 4V13.3333L6 12L10 13.3333L14 12V2.66667L10 4L6 2.66667Z"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M6 2.66667V12M10 4V13.3333"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export function AlertIcon(props: IconProps) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden {...props}>

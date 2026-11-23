@@ -16,6 +16,7 @@ import {
   CardTitle,
   Checkbox,
   ChevronDownIcon,
+  CollapseIcon,
   Chip,
   CompareCard,
   ConfirmDialog,
@@ -33,12 +34,14 @@ import {
   LayerToggle,
   LogoIcon,
   MAP_MARKER_STATUSES,
+  MapIcon,
   MapMarker,
   NotificationPanel,
   PageTitle,
   Progress,
   PropertyRow,
   ScheduleBlock,
+  Segmented,
   SearchIcon,
   SelectField,
   StatTile,
@@ -434,6 +437,11 @@ export default function DesignSystemPage() {
           <Tab>입항</Tab>
           <Tab>출항</Tab>
         </div>
+        <Segmented
+          options={["전체", "VSR 해역 내", "묘박"]}
+          value="전체"
+          className="self-start border border-default"
+        />
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
             status="하역 중"
@@ -536,6 +544,8 @@ export default function DesignSystemPage() {
           <ArrowRightIcon />
           <ExportIcon />
           <ExpandIcon />
+          <CollapseIcon />
+          <MapIcon />
           <AlertIcon />
           <WarningIcon />
         </div>
