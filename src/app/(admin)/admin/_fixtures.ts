@@ -1,11 +1,4 @@
-import type {
-  ArrivalQueueItem,
-  BerthStatus,
-  DashboardAlert,
-  DashboardKpi,
-  SeaState,
-  VesselMapPoint,
-} from "./_components/dashboard/types";
+import type { ArrivalQueueItem, BerthStatus } from "./_components/dashboard/types";
 
 // 퍼블리싱용 Figma 샘플 데이터입니다. 백엔드 API 연동 시 TanStack Query 로 교체합니다.
 
@@ -14,96 +7,6 @@ export const adminUserFixture = {
 };
 
 export const dashboardFixture = {
-  updatedAt: "마지막 갱신 14:35 · 5분마다 자동 갱신",
-  kpis: [
-    {
-      id: "approaching",
-      label: "접근 선박",
-      value: "18",
-      unit: "척",
-      delta: "↑ 3",
-      sub: "1시간 전 15척",
-    },
-    {
-      id: "anchored",
-      label: "묘박 대기",
-      value: "4",
-      unit: "척",
-      delta: "↓ 1",
-      sub: "평균 대기 6h 30m",
-    },
-    {
-      id: "acceptance",
-      label: "권고 수용률",
-      value: "82",
-      unit: "%",
-      delta: "↑ 4%",
-      sub: "오늘 권고 22건 중 18건",
-    },
-    {
-      id: "fuel",
-      label: "오늘 절감 연료",
-      value: "3.5",
-      unit: "t",
-      delta: "↑ 0.6",
-      sub: "CO₂ 10.9 tCO₂ 감축",
-    },
-    {
-      id: "attention",
-      label: "확인 필요",
-      value: "8",
-      unit: "건",
-      delta: "↑ 3",
-      sub: "검증 필요 2 · 지연 1",
-      alert: true,
-    },
-  ] satisfies DashboardKpi[],
-  mapTotal: 8,
-  // Figma 지도(888×412) 위 마커 좌표를 % 로 환산한 값
-  mapPoints: [
-    { id: "v1", status: "항해 중", x: 47.3, y: 60.7 },
-    { id: "v2", status: "항해 중", x: 58.6, y: 80.1 },
-    { id: "v3", status: "항해 중", x: 68.7, y: 51 },
-    { id: "v4", status: "대기 예상", x: 78.8, y: 92.2 },
-    { id: "v5", status: "대기 예상", x: 33.8, y: 87.4 },
-    { id: "v6", status: "묘박", x: 85.6, y: 72.8 },
-    { id: "v7", status: "묘박", x: 89, y: 77.7 },
-    { id: "v8", status: "검증 필요", x: 63.1, y: 34 },
-    { id: "v9", status: "항해 중", x: 42.8, y: 97.1 },
-  ] satisfies VesselMapPoint[],
-  seaState: {
-    source: "기상청 · 10분 전",
-    rows: [
-      { label: "풍향 · 풍속", value: "NE 76° · 5.0 m/s" },
-      { label: "파고 · 주기", value: "0.75 m · 5.5 s" },
-      { label: "조류", value: "0.3 m/s · 70°" },
-      { label: "가시거리", value: "10.4 km" },
-    ],
-  } satisfies SeaState,
-  alertTotal: 8,
-  alerts: [
-    {
-      id: "a1",
-      severity: "error",
-      title: "AIS·레이더 위치 불일치",
-      meta: "SEOHAE STAR IMO 1234567 · 신뢰도 32",
-      time: "14:35",
-    },
-    {
-      id: "a2",
-      severity: "error",
-      title: "연속 위치 점프 감지",
-      meta: "BADA LINK IMO 9812345 · 신뢰도 38",
-      time: "14:31",
-    },
-    {
-      id: "a3",
-      severity: "warning",
-      title: "3부두 B2 하역 지연 예측",
-      meta: "가용 16:00 → 16:30 · 영향 2척",
-      time: "14:27",
-    },
-  ] satisfies DashboardAlert[],
   arrivalTotal: 8,
   arrivals: [
     {

@@ -55,6 +55,7 @@ export interface AssignmentDraft {
   vesselMeta: string;
   options: BerthOption[];
   selectedOptionId: string;
+  message?: string;
 }
 
 export interface ScheduleToast {

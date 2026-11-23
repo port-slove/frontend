@@ -1,18 +1,21 @@
-import { Button, ChevronDownIcon, ExportIcon, PageTitle } from "@/shared/ui";
+import { Button, ChevronDownIcon, ExportIcon } from "@/shared/ui";
 
-import { AlertsCard } from "./_components/dashboard/alerts-card";
 import { ArrivalQueueCard } from "./_components/dashboard/arrival-queue-card";
 import { BerthStatusCard } from "./_components/dashboard/berth-status-card";
-import { KpiRow } from "./_components/dashboard/kpi-row";
-import { SeaStateCard } from "./_components/dashboard/sea-state-card";
-import { VesselMapCard } from "./_components/dashboard/vessel-map-card";
+import {
+  AlertsSection,
+  DashboardTitle,
+  KpiSection,
+  SeaStateSection,
+  VesselMapSection,
+} from "./_components/dashboard/dashboard-sections";
 import { dashboardFixture as data } from "./_fixtures";
 
 export default function Page() {
   return (
     <>
       <div className="flex items-center justify-between">
-        <PageTitle title="항만 운항 현황" subtitle={data.updatedAt} />
+        <DashboardTitle />
         <div className="flex items-center gap-3">
           <Button variant="outline" size="md">
             오늘
@@ -25,16 +28,17 @@ export default function Page() {
         </div>
       </div>
 
-      <KpiRow items={data.kpis} />
+      <KpiSection />
 
       <div className="flex gap-4">
-        <VesselMapCard points={data.mapPoints} total={data.mapTotal} />
+        <VesselMapSection />
         <div className="flex w-128 shrink-0 flex-col gap-4">
-          <SeaStateCard seaState={data.seaState} />
-          <AlertsCard alerts={data.alerts} total={data.alertTotal} />
+          <SeaStateSection />
+          <AlertsSection />
         </div>
       </div>
 
+      {/* TODO: 선석 가용 시각·선박 제원을 받을 API 가 생기면 POST /v1/mvp/recommendations 로 연동 */}
       <div className="flex items-start gap-4">
         <ArrivalQueueCard items={data.arrivals} total={data.arrivalTotal} />
         <BerthStatusCard berths={data.berths} />

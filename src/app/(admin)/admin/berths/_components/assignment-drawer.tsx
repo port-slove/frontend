@@ -71,6 +71,7 @@ export function AssignmentDrawer({ draft, onClose }: AssignmentDrawerProps) {
 
       <section role="radiogroup" aria-label="추천 선석" className="flex flex-col gap-2">
         <p className="text-label-md text-secondary">추천 선석</p>
+        {draft.message && <p className="text-body-sm text-error">{draft.message}</p>}
         {draft.options.map((option) => (
           <ActionOption
             key={option.id}
