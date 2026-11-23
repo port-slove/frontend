@@ -33,7 +33,7 @@ export function VesselMapCard({ points, total, image, overlay }: VesselMapCardPr
         </Button>
       </div>
 
-      <div className="relative min-h-103 flex-1 overflow-hidden rounded-2xl">
+      <div className="relative aspect-888/412 w-full overflow-hidden rounded-2xl">
         <Image
           src={image.src}
           alt={image.alt}

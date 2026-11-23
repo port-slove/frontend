@@ -155,7 +155,7 @@ export function BerthGantt({ range, piers, items, detailEnabled }: BerthGanttPro
                               name={item.name}
                               meta={item.meta}
                               aria-expanded={detailEnabled ? open : undefined}
-                              onClick={() => setOpenId(open ? null : item.id)}
+                              onClick={() => detailEnabled && setOpenId(open ? null : item.id)}
                               onBlur={() => setOpenId(null)}
                               className="h-17 w-full whitespace-nowrap"
                             />

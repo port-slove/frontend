@@ -1,7 +1,7 @@
-import type { MarineResponse } from "../../_api/marine";
-import type { MvpAlert, MvpKpis, MvpVessel } from "../../_api/mvp";
-import { EMPTY_VALUE as EMPTY, formatKstTime } from "../../_lib/format";
-import { MAP_STATE_LABELS, REASON_LABELS } from "../../_lib/reliability";
+import type { MarineResponse } from "@/app/(admin)/admin/_api/marine";
+import type { MvpAlert, MvpKpis, MvpVessel } from "@/app/(admin)/admin/_api/mvp";
+import { EMPTY_VALUE as EMPTY, formatKstTime } from "@/app/(admin)/admin/_lib/format";
+import { MAP_STATE_LABELS, REASON_LABELS } from "@/app/(admin)/admin/_lib/reliability";
 import type { DashboardAlert, DashboardKpi, SeaState, VesselMapPoint } from "./types";
 
 function formatHours(hours: number) {
@@ -44,9 +44,12 @@ export function toDashboardKpis(kpis: MvpKpis): DashboardKpi[] {
     {
       id: "fuel",
       label: "절감 연료",
-      value: kpis.fuel_saved_t === null ? EMPTY : String(kpis.fuel_saved_t),
+      value: kpis.fuel_saved_t === null ? EMPTY : kpis.fuel_saved_t.toFixed(1),
       unit: kpis.fuel_saved_t === null ? undefined : "t",
-      sub: kpis.co2_saved_tco2 === null ? "권고 실행 전" : `CO₂ ${kpis.co2_saved_tco2} tCO₂ 감축`,
+      sub:
+        kpis.co2_saved_tco2 === null
+          ? "권고 실행 전"
+          : `CO₂ ${kpis.co2_saved_tco2.toFixed(1)} tCO₂ 감축`,
     },
     {
       id: "attention",

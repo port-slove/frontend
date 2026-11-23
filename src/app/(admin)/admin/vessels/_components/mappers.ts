@@ -1,6 +1,6 @@
-import type { MvpVessel } from "../../_api/mvp";
-import { formatKstTimeFrom } from "../../_lib/format";
-import { MAP_STATE_LABELS, REASON_LABELS, trustTone } from "../../_lib/reliability";
+import type { MvpVessel } from "@/app/(admin)/admin/_api/mvp";
+import { formatKstTimeFrom } from "@/app/(admin)/admin/_lib/format";
+import { MAP_STATE_LABELS, REASON_LABELS, trustTone } from "@/app/(admin)/admin/_lib/reliability";
 import type { VesselDetail, VesselRow } from "./types";
 
 const UNKNOWN_NAME = "선명 미수신";

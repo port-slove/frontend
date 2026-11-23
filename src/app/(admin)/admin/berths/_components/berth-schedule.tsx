@@ -17,7 +17,7 @@ import {
   WarningIcon,
 } from "@/shared/ui";
 
-import { CardMessage } from "../../_components/card-message";
+import { CardMessage } from "@/app/(admin)/admin/_components/card-message";
 import { berthQueries } from "../_api/berth-simulation";
 import { SCENARIO_PIERS } from "../_api/scenario";
 import { AssignmentDrawer } from "./assignment-drawer";
@@ -147,7 +147,7 @@ export function BerthSchedule({
         {drawerOpen &&
           (draft ? (
             <AssignmentDrawer
-              key={recommendation.dataUpdatedAt}
+              key={draft.selectedOptionId}
               draft={draft}
               onClose={() => setDrawerOpen(false)}
             />

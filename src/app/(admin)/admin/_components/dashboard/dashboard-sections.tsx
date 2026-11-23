@@ -4,11 +4,11 @@ import { useQuery } from "@tanstack/react-query";
 
 import { PageTitle } from "@/shared/ui";
 
-import { marineQueries } from "../../_api/marine";
-import { mvpQueries } from "../../_api/mvp";
-import { formatKstTime } from "../../_lib/format";
+import { marineQueries } from "@/app/(admin)/admin/_api/marine";
+import { mvpQueries } from "@/app/(admin)/admin/_api/mvp";
+import { formatKstTime } from "@/app/(admin)/admin/_lib/format";
 import { AlertsCard } from "./alerts-card";
-import { CardMessage } from "../card-message";
+import { CardMessage } from "@/app/(admin)/admin/_components/card-message";
 import { KpiRow } from "./kpi-row";
 import {
   type MapBounds,
@@ -51,12 +51,12 @@ const PORT_MAP = {
 };
 
 export function VesselMapSection() {
-  const { data, isPending, isError, refetch } = useQuery(mvpQueries.vessels());
+  const { data, isPending, refetch } = useQuery(mvpQueries.vessels());
   const points = data ? toMapPoints(data.vessels, PORT_MAP.bounds) : [];
 
   let overlay = null;
   if (isPending) overlay = <CardMessage message="선박 위치를 불러오는 중" />;
-  else if (isError) overlay = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
+  else if (!data) overlay = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
   else if (data.data_status === "no_observations")
     overlay = <CardMessage message="수신된 AIS 관측이 없어요" />;
 
@@ -71,12 +71,12 @@ export function VesselMapSection() {
 }
 
 export function SeaStateSection() {
-  const { data, isPending, isError, refetch } = useQuery(marineQueries.observation());
+  const { data, isPending, refetch } = useQuery(marineQueries.observation());
   const seaState = data ? toSeaState(data) : null;
 
   let message = null;
   if (isPending) message = <CardMessage message="해상 관측을 불러오는 중" />;
-  else if (isError) message = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
+  else if (!data) message = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
   else if (!seaState) message = <CardMessage message="해상 관측 정보를 받을 수 없어요" />;
 
   return <SeaStateCard seaState={seaState ?? undefined} message={message} />;
@@ -85,12 +85,12 @@ export function SeaStateSection() {
 const VISIBLE_ALERTS = 3;
 
 export function AlertsSection() {
-  const { data, isPending, isError, refetch } = useQuery(mvpQueries.alerts());
+  const { data, isPending, refetch } = useQuery(mvpQueries.alerts());
   const alerts = data?.alerts ?? [];
 
   let message = null;
   if (isPending) message = <CardMessage message="알림을 불러오는 중" />;
-  else if (isError) message = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
+  else if (!data) message = <CardMessage message={LOAD_ERROR} onRetry={() => refetch()} />;
   else if (alerts.length === 0) message = <CardMessage message="확인이 필요한 선박이 없어요" />;
 
   return (

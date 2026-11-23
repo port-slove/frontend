@@ -5,10 +5,10 @@ import { useMemo, useState } from "react";
 
 import { Button, Card, ChevronDownIcon, PageTitle, Segmented } from "@/shared/ui";
 
-import { aisQueries, toShipNameMap } from "../../_api/ais";
-import { mvpQueries } from "../../_api/mvp";
-import { formatKstTime } from "../../_lib/format";
-import { CardMessage } from "../../_components/card-message";
+import { aisQueries, toShipNameMap } from "@/app/(admin)/admin/_api/ais";
+import { mvpQueries } from "@/app/(admin)/admin/_api/mvp";
+import { formatKstTime } from "@/app/(admin)/admin/_lib/format";
+import { CardMessage } from "@/app/(admin)/admin/_components/card-message";
 import { toVesselDetail, toVesselRow } from "./mappers";
 import { VESSEL_ZONE_FILTERS, type VesselZoneFilter } from "./types";
 import { VesselDetailPanel } from "./vessel-detail-panel";
@@ -57,7 +57,14 @@ export function VesselMonitor() {
       <div className="flex items-center justify-between">
         <PageTitle title="선박 모니터링" subtitle={summary} />
         <div className="flex items-center gap-3">
-          <Segmented options={VESSEL_ZONE_FILTERS} value={zone} onValueChange={setZone} />
+          <Segmented
+            options={VESSEL_ZONE_FILTERS}
+            value={zone}
+            onValueChange={(next) => {
+              setZone(next);
+              setSelectedId(null);
+            }}
+          />
           {/* TODO: 선종 데이터가 API 에 생기면 필터로 연결 */}
           <Button variant="outline" size="md">
             선종 전체
