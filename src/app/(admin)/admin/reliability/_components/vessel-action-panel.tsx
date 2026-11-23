@@ -1,8 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 
 import { ActionOption, Button, CardHeader, PropertyRow, TextField, Toast } from "@/shared/ui";
+import { ApiError } from "@/shared/api/client";
+import { INCIDENT_TARGET, recordIncident } from "../_api/incident-record";
 import { ACTION_HISTORY } from "./reliability-mock-data";
 
 function RadioIcon() {
@@ -140,6 +143,26 @@ export function VesselActionPanel() {
   const [selected, setSelected] = useState<string>("vts");
   const [memo, setMemo] = useState("");
   const [showToast, setShowToast] = useState(true);
+  const [localResult, setLocalResult] = useState<string | null>(null);
+
+  const mutation = useMutation({
+    mutationFn: recordIncident,
+  });
+
+  const selectedAction = ACTIONS.find((action) => action.id === selected)!;
+
+  function handleSubmit() {
+    const target = INCIDENT_TARGET[selected];
+    const reason = memo.trim() || selectedAction.title;
+
+    if (!target) {
+      setLocalResult(`${selectedAction.title}로 기록했습니다 (내부 판정 · 외부 통보 없음)`);
+      return;
+    }
+
+    setLocalResult(null);
+    mutation.mutate({ target, vesselId: "SEOHAE STAR", reason });
+  }
 
   return (
     <div className="relative flex w-100 shrink-0 flex-col gap-4">
@@ -162,10 +185,35 @@ export function VesselActionPanel() {
           placeholder="판단 메모를 입력하세요"
           className="h-22"
         />
-        <Button variant="primary" fullWidth className="h-10 text-label-md">
-          조치 기록
+        <Button
+          variant="primary"
+          fullWidth
+          className="h-10 text-label-md"
+          disabled={mutation.isPending}
+          onClick={handleSubmit}
+        >
+          {mutation.isPending ? "기록하는 중..." : "조치 기록"}
           <CheckIcon />
         </Button>
+        {localResult && <p className="text-caption-md text-success">{localResult}</p>}
+        {mutation.isSuccess && (
+          <p className="text-caption-md text-success">
+            {selectedAction.title} 접수됨 · 상태: {mutation.data.status} ·{" "}
+            {new Intl.DateTimeFormat("ko-KR", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+              timeZone: "Asia/Seoul",
+            }).format(new Date(mutation.data.computed_at))}
+          </p>
+        )}
+        {mutation.isError && (
+          <p className="text-caption-md text-error">
+            {mutation.error instanceof ApiError
+              ? mutation.error.message
+              : "조치 기록에 실패했습니다"}
+          </p>
+        )}
       </div>
 
       <div className="flex flex-col gap-2.5 rounded-2xl border border-default bg-surface p-4">
