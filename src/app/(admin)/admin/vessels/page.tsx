@@ -1,5 +1,6 @@
-import { PageTitle } from "@/shared/ui";
+import { VesselMonitor } from "./_components/vessel-monitor";
+import { vesselMonitorFixture } from "./_fixtures";
 
 export default function Page() {
-  return <PageTitle title="선박 모니터링" />;
+  return <VesselMonitor {...vesselMonitorFixture} />;
 }
