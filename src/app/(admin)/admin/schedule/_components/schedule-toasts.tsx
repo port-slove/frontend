@@ -1,4 +1,8 @@
-import { Toast } from "@/shared/ui";
+"use client";
+
+import { useState } from "react";
+
+import { Toast, type ToastTone } from "@/shared/ui";
 
 function BellIcon() {
   return (
@@ -41,29 +45,57 @@ function CloseIcon() {
   );
 }
 
+interface ScheduleToastData {
+  id: string;
+  tone: ToastTone;
+  title: string;
+  description: string;
+  actionLabel: string;
+  time: string;
+}
+
+const INITIAL_TOASTS: ScheduleToastData[] = [
+  {
+    id: "delay-forecast",
+    tone: "warning",
+    title: "3부두 B2 하역 지연 예측 +30분",
+    description: "진행률 64% · 기존 16:00 → 16:30 HANBIT PIONEER 권고안 자동 갱신됐습니다.",
+    actionLabel: "영향 권고 확인",
+    time: "1분 전",
+  },
+  {
+    id: "assignment-hold",
+    tone: "error",
+    title: "SEOHAE STAR 선석 배정 보류",
+    description: "신뢰도 32점 · 위치 검증 전까지 3부두 B1 배정이 보류됩니다.",
+    actionLabel: "위치 검증하기",
+    time: "방금",
+  },
+];
+
 export function ScheduleToasts() {
+  const [toasts, setToasts] = useState(INITIAL_TOASTS);
+
+  if (toasts.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex w-100 flex-col gap-3">
-      <Toast
-        tone="warning"
-        icon={<BellIcon />}
-        closeIcon={<CloseIcon />}
-        actionIcon={<ChevronRightIcon />}
-        title="3부두 B2 하역 지연 예측 +30분"
-        description="진행률 64% · 기존 16:00 → 16:30 HANBIT PIONEER 권고안 자동 갱신됐습니다."
-        actionLabel="영향 권고 확인"
-        time="1분 전"
-      />
-      <Toast
-        tone="error"
-        icon={<BellIcon />}
-        closeIcon={<CloseIcon />}
-        actionIcon={<ChevronRightIcon />}
-        title="SEOHAE STAR 선석 배정 보류"
-        description="신뢰도 32점 · 위치 검증 전까지 3부두 B1 배정이 보류됩니다."
-        actionLabel="위치 검증하기"
-        time="방금"
-      />
+      {toasts.map((toast) => (
+        <Toast
+          key={toast.id}
+          tone={toast.tone}
+          icon={<BellIcon />}
+          closeIcon={<CloseIcon />}
+          actionIcon={<ChevronRightIcon />}
+          title={toast.title}
+          description={toast.description}
+          actionLabel={toast.actionLabel}
+          time={toast.time}
+          onClose={() => setToasts((prev) => prev.filter((t) => t.id !== toast.id))}
+        />
+      ))}
     </div>
   );
 }

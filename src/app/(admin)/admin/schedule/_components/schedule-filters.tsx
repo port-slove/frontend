@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import { Button, DateRange, FilterChip, SelectField, Tab, Toggle } from "@/shared/ui";
 
 const STATUS_TABS = [
@@ -18,6 +22,8 @@ function SearchIcon() {
 }
 
 export function ScheduleFilters() {
+  const [appliedFilters, setAppliedFilters] = useState([{ field: "선명", value: "GEUMJEONG 7" }]);
+
   return (
     <div className="flex flex-col gap-5 rounded-2xl border border-default bg-surface p-5">
       <div className="flex items-center gap-1.5">
@@ -69,12 +75,29 @@ export function ScheduleFilters() {
           ))}
         </div>
         <span className="flex-1" />
-        <p className="shrink-0 text-label-md text-secondary">적용된 필터</p>
-        <FilterChip field="선명" value="GEUMJEONG 7" />
-        <Button variant="outline" className="h-10 px-4 text-label-md">
-          모두 켜기
-        </Button>
-        <Button variant="dark" className="h-10 px-4 text-label-md">
+        {appliedFilters.length > 0 && (
+          <>
+            <p className="shrink-0 text-label-md text-secondary">적용된 필터</p>
+            {appliedFilters.map((filter) => (
+              <FilterChip
+                key={filter.field}
+                field={filter.field}
+                value={filter.value}
+                onRemove={() =>
+                  setAppliedFilters((prev) => prev.filter((f) => f.field !== filter.field))
+                }
+              />
+            ))}
+            <Button variant="outline" className="h-10 px-4 text-label-md">
+              모두 켜기
+            </Button>
+          </>
+        )}
+        <Button
+          variant="dark"
+          className="h-10 px-4 text-label-md"
+          onClick={() => setAppliedFilters([])}
+        >
           전체 삭제
         </Button>
       </div>
