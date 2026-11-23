@@ -1,10 +1,24 @@
+"use client";
+
 import Image from "next/image";
+import { useQuery } from "@tanstack/react-query";
 
 import { CardHeader, Chip, DeductionRow, MapMarker, Progress } from "@/shared/ui";
-import { DEDUCTIONS, MAP_POSITIONS, SELECTED_VESSEL, STATS } from "./reliability-mock-data";
+import { ApiError } from "@/shared/api/client";
+import { DEDUCTION_LABEL, reliabilityQueries } from "../_api/reliability";
+import { MAP_POSITIONS, SELECTED_VESSEL } from "./reliability-mock-data";
+
+function formatTime(iso: string) {
+  return new Intl.DateTimeFormat("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Seoul",
+  }).format(new Date(iso));
+}
 
 export function VesselEvidenceCard() {
-  const totalDeduction = DEDUCTIONS.reduce((sum, item) => sum + Number(item.points), 0);
+  const { data, isPending, error } = useQuery(reliabilityQueries.seohaeStar());
 
   return (
     <div className="flex w-full flex-1 flex-col gap-4 rounded-2xl border border-default bg-surface p-4">
@@ -13,7 +27,7 @@ export function VesselEvidenceCard() {
           <p className="text-h2 text-primary">{SELECTED_VESSEL.name}</p>
           <p className="text-caption-md text-secondary">{SELECTED_VESSEL.meta}</p>
         </div>
-        <Chip tone="error">{SELECTED_VESSEL.score}</Chip>
+        {data?.score != null && <Chip tone="error">신뢰도 {data.score}점</Chip>}
       </div>
 
       <div className="relative h-60 w-full overflow-hidden rounded-lg">
@@ -66,43 +80,58 @@ export function VesselEvidenceCard() {
         >
           레이더 위치
         </Chip>
-        <Chip
-          tone="dark"
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{
-            left: `${MAP_POSITIONS.distanceLabel.left}%`,
-            top: `${MAP_POSITIONS.distanceLabel.top}%`,
-          }}
-        >
-          1.8 NM
-        </Chip>
       </div>
 
-      <div className="flex items-start gap-3">
-        {STATS.map((stat) => (
-          <div key={stat.label} className="flex flex-1 flex-col gap-2 rounded-lg bg-page p-4">
-            <p className="text-caption-md whitespace-nowrap text-secondary">{stat.label}</p>
-            <div className="flex items-baseline gap-1 whitespace-nowrap">
-              <p className="text-h1 text-primary">{stat.value}</p>
-              <p className="text-body-sm text-secondary">{stat.unit}</p>
+      {isPending && <p className="text-body-sm text-secondary">신뢰도 계산 중...</p>}
+      {error && (
+        <p className="text-body-sm text-error">
+          {error instanceof ApiError ? error.message : "신뢰도 점수를 불러오지 못했습니다"}
+        </p>
+      )}
+
+      {data?.score != null && (
+        <>
+          <div className="flex items-start gap-3">
+            <div className="flex flex-1 flex-col gap-2 rounded-lg bg-page p-4">
+              <p className="text-caption-md whitespace-nowrap text-secondary">신뢰도</p>
+              <div className="flex items-baseline gap-1 whitespace-nowrap">
+                <p className="text-h1 text-primary">{data.score}</p>
+                <p className="text-body-sm text-secondary">/ 100</p>
+              </div>
+              <Progress tone={data.score < 40 ? "error" : "success"} value={data.score} />
             </div>
-            <Progress tone={stat.tone} value={stat.progress} />
+            <div className="flex flex-1 flex-col gap-2 rounded-lg bg-page p-4">
+              <p className="text-caption-md whitespace-nowrap text-secondary">공급자 상태</p>
+              <p className="text-h1 text-primary">{data.inputs.provider_valid ? "정상" : "실패"}</p>
+              <Progress
+                tone={data.inputs.provider_valid ? "success" : "error"}
+                value={data.inputs.provider_valid ? 100 : 0}
+              />
+            </div>
+            <div className="flex flex-1 flex-col gap-2 rounded-lg bg-page p-4">
+              <p className="text-caption-md whitespace-nowrap text-secondary">레이더 일치</p>
+              <p className="text-h1 text-primary">{data.inputs.radar_match ? "일치" : "불일치"}</p>
+              <Progress
+                tone={data.inputs.radar_match ? "success" : "error"}
+                value={data.inputs.radar_match ? 100 : 0}
+              />
+            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="flex items-center gap-3">
-        <CardHeader title="감점 내역" className="flex-1" />
-        <p className="text-label-md whitespace-nowrap text-error">100 → {100 + totalDeduction}점</p>
-      </div>
-      {DEDUCTIONS.map((item) => (
-        <DeductionRow
-          key={item.reason}
-          reason={item.reason}
-          detail={item.detail}
-          points={item.points}
-        />
-      ))}
+          <div className="flex items-center gap-3">
+            <CardHeader title="감점 내역" className="flex-1" />
+            <p className="text-label-md whitespace-nowrap text-error">100 → {data.score}점</p>
+          </div>
+          {data.deductions.map((item) => (
+            <DeductionRow
+              key={item.reason}
+              reason={DEDUCTION_LABEL[item.reason] ?? item.reason}
+              detail={`관측 ${formatTime(data.inputs.observed_at)}`}
+              points={`-${item.points}`}
+            />
+          ))}
+        </>
+      )}
     </div>
   );
 }

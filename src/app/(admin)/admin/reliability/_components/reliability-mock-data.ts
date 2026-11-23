@@ -2,8 +2,8 @@
 export const NEEDS_REVIEW = [
   {
     id: "seohae-star",
-    title: "SEOHAE STAR · 32점",
-    meta: "AIS·레이더 위치 1.8 NM 불일치",
+    title: "SEOHAE STAR",
+    meta: "AIS·레이더 위치 불일치 · 연속 위치 점프",
     time: "14:35",
     selected: true,
   },
@@ -34,7 +34,6 @@ export const RESOLVED_TODAY = [
 export const SELECTED_VESSEL = {
   name: "SEOHAE STAR",
   meta: "IMO 1234567 · 벌크선 82,000DWT · 접근 수로",
-  score: "신뢰도 32점",
 };
 
 export const MAP_POSITIONS = {
@@ -44,18 +43,6 @@ export const MAP_POSITIONS = {
   aisChip: { left: 27.2, top: 70.8 },
   radarChip: { left: 60.9, top: 20 },
 };
-
-export const STATS = [
-  { label: "신뢰도", value: "32", unit: "/ 100", tone: "error" as const, progress: 32 },
-  { label: "AIS 수신 간격", value: "12", unit: "초", tone: "warning" as const, progress: 40 },
-  { label: "레이더 일치율", value: "41", unit: "%", tone: "error" as const, progress: 41 },
-];
-
-export const DEDUCTIONS = [
-  { reason: "AIS·레이더 위치 불일치", detail: "1.8 NM 차이 · 14:35", points: "-30" },
-  { reason: "연속 위치 점프", detail: "3회 · 14:20–14:33", points: "-25" },
-  { reason: "AIS 수신 공백", detail: "최대 4분 · 14:12", points: "-13" },
-];
 
 export const ACTION_HISTORY = [
   { time: "14:36 · 시스템", action: "권고·배정 자동 보류" },
