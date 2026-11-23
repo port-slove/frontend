@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import {
   Button,
@@ -12,7 +13,8 @@ import {
   PropertyRow,
   Toast,
 } from "@/shared/ui";
-import { JIT_COMPARE } from "./optimization-mock-data";
+import { ApiError } from "@/shared/api/client";
+import { JIT_SCENARIO, jitQueries } from "../_api/jit";
 
 function SendIcon() {
   return (
@@ -69,59 +71,133 @@ function CloseIcon() {
   );
 }
 
+function formatTime(iso: string | null) {
+  if (!iso) return "—";
+  return new Intl.DateTimeFormat("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Asia/Seoul",
+  }).format(new Date(iso));
+}
+
+function formatMinutes(hours: number | null) {
+  if (hours === null) return "—";
+  return `${Math.round(hours * 60)}분`;
+}
+
 export function JitCompareCard() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [showHoldToast, setShowHoldToast] = useState(true);
+  const { data, isPending, error } = useQuery(jitQueries.recommendation());
+
+  const current =
+    data && data.current_fuel_t !== null
+      ? {
+          speed: JIT_SCENARIO.currentSpeedKn.toFixed(1),
+          arrival: formatTime(data.eta),
+          wait: formatMinutes(data.current_wait_hours),
+          fuel: `${data.current_fuel_t.toFixed(1)} t`,
+          co2: `${(data.current_fuel_t * JIT_SCENARIO.co2TPerFuelT).toFixed(1)} tCO₂`,
+        }
+      : null;
+
+  const recommended =
+    data && data.recommended_speed_kn !== null && data.recommended_fuel_t !== null
+      ? {
+          speed: data.recommended_speed_kn.toFixed(1),
+          arrival: formatTime(data.target_eta),
+          wait: formatMinutes(data.recommended_wait_hours),
+          fuel: `${data.recommended_fuel_t.toFixed(1)} t`,
+          co2: `${(data.recommended_fuel_t * JIT_SCENARIO.co2TPerFuelT).toFixed(1)} tCO₂`,
+        }
+      : null;
+
+  const waitSavedMinutes =
+    data?.current_wait_hours != null && data.recommended_wait_hours != null
+      ? Math.round((data.current_wait_hours - data.recommended_wait_hours) * 60)
+      : null;
 
   return (
     <div className="relative flex w-full flex-1 flex-col gap-5 rounded-2xl border border-default bg-surface p-4">
       <div className="flex items-center gap-3">
         <CardHeader title="JIT 권고 비교" className="flex-1" />
-        <Chip tone="brand">{JIT_COMPARE.vessel}</Chip>
+        <Chip tone="brand">HANBIT PIONEER</Chip>
       </div>
-      <p className="text-caption-md text-secondary">{JIT_COMPARE.targetEtaNote}</p>
+      <p className="text-caption-md text-secondary">
+        {data?.target_eta
+          ? `Target ETA ${formatTime(data.target_eta)} · 3부두 B2 가용 시각 기준`
+          : "Target ETA 계산 중 · 3부두 B2 가용 시각 기준"}
+      </p>
 
-      <div className="flex items-start gap-3">
-        <CompareCard
-          title="현재 속도 유지"
-          speed={JIT_COMPARE.current.speed}
-          arrival={JIT_COMPARE.current.arrival}
-          wait={JIT_COMPARE.current.wait}
-          fuel={JIT_COMPARE.current.fuel}
-          co2={JIT_COMPARE.current.co2}
-          className="flex-1"
-        />
-        <CompareCard
-          recommended
-          title="JIT 권고 속도"
-          speed={JIT_COMPARE.recommended.speed}
-          arrival={JIT_COMPARE.recommended.arrival}
-          wait={JIT_COMPARE.recommended.wait}
-          fuel={JIT_COMPARE.recommended.fuel}
-          co2={JIT_COMPARE.recommended.co2}
-          className="flex-1"
-        />
-      </div>
+      {isPending && <p className="text-body-sm text-secondary">권고 계산 중...</p>}
+      {error && (
+        <p className="text-body-sm text-error">
+          {error instanceof ApiError ? error.message : "권고 계산에 실패했습니다"}
+        </p>
+      )}
 
-      <div className="flex items-center gap-2">
-        <p className="text-label-md text-secondary">절감 효과</p>
-        {JIT_COMPARE.savings.map((item) => (
-          <Chip key={item.label} tone="success">
-            {item.label}
-          </Chip>
-        ))}
-      </div>
+      {current && recommended && (
+        <>
+          <div className="flex items-start gap-3">
+            <CompareCard
+              title="현재 속도 유지"
+              speed={current.speed}
+              arrival={current.arrival}
+              wait={current.wait}
+              fuel={current.fuel}
+              co2={current.co2}
+              className="flex-1"
+            />
+            <CompareCard
+              recommended
+              title="JIT 권고 속도"
+              speed={recommended.speed}
+              arrival={recommended.arrival}
+              wait={recommended.wait}
+              fuel={recommended.fuel}
+              co2={recommended.co2}
+              className="flex-1"
+            />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <p className="text-label-md text-secondary">절감 효과</p>
+            {waitSavedMinutes !== null && (
+              <Chip tone="success">
+                대기 {waitSavedMinutes >= 0 ? "-" : "+"}
+                {Math.abs(waitSavedMinutes)}분
+              </Chip>
+            )}
+            {data?.fuel_saved_t != null && (
+              <Chip tone="success">연료 {data.fuel_saved_t.toFixed(1)} t</Chip>
+            )}
+            {data?.co2_saved_t != null && (
+              <Chip tone="success">CO₂ {data.co2_saved_t.toFixed(1)} tCO₂</Chip>
+            )}
+          </div>
+        </>
+      )}
 
       <div className="flex flex-col gap-2.5">
         <p className="text-label-md text-secondary">반영된 기상 보정 조건</p>
         <div className="flex flex-wrap gap-2">
-          {JIT_COMPARE.weather.map((item) => (
-            <InfoChip key={item.label} label={item.label} value={item.value} />
-          ))}
+          <InfoChip label="풍속" value={`${JIT_SCENARIO.windSpeedMps.toFixed(1)} m/s`} />
+          <InfoChip label="파고" value={`${JIT_SCENARIO.waveHeightM.toFixed(2)} m`} />
+          <InfoChip
+            label="조류(항로방향)"
+            value={`${JIT_SCENARIO.currentAlongTrackKn.toFixed(2)} kn`}
+          />
+          {data?.weather_speed_loss_fraction != null && (
+            <InfoChip
+              label="출력 손실"
+              value={`-${(data.weather_speed_loss_fraction * 100).toFixed(1)}%`}
+            />
+          )}
         </div>
       </div>
 
-      <PropertyRow label="VSR 저속해역" value={JIT_COMPARE.vsrNote} />
+      <PropertyRow label="VSR 저속해역" value="준수 · 권고 11.6 kn ≤ 12 kn" />
 
       <div className="flex items-start gap-2">
         <Button variant="outline" className="h-10 w-30 px-5 text-label-md">
@@ -153,12 +229,12 @@ export function JitCompareCard() {
         </div>
       )}
 
-      {confirmOpen && (
+      {confirmOpen && recommended && (
         <div className="fixed inset-0 z-30 flex items-center justify-center bg-black/40">
           <ConfirmDialog
             icon={<SendIcon />}
-            title={`${JIT_COMPARE.vessel}에 권고를 전송할까요?`}
-            description={`권고 ${JIT_COMPARE.recommended.speed} kn · Target ETA ${JIT_COMPARE.recommended.arrival} · 3부두 B2`}
+            title="HANBIT PIONEER에 권고를 전송할까요?"
+            description={`권고 ${recommended.speed} kn · Target ETA ${recommended.arrival} · 3부두 B2`}
             confirmLabel="전송"
             onCancel={() => setConfirmOpen(false)}
             onConfirm={() => setConfirmOpen(false)}
