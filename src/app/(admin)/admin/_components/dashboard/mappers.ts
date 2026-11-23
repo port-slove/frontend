@@ -1,29 +1,10 @@
-import type { MapMarkerStatus } from "@/shared/ui";
-
 import type { MarineResponse } from "../../_api/marine";
-import type {
-  MvpAlert,
-  MvpKpis,
-  MvpMapState,
-  MvpVessel,
-  ReliabilityReasonCode,
-} from "../../_api/mvp";
+import type { MvpAlert, MvpKpis, MvpVessel } from "../../_api/mvp";
+import { EMPTY_VALUE as EMPTY, formatKstTime } from "../../_lib/format";
+import { MAP_STATE_LABELS, REASON_LABELS } from "../../_lib/reliability";
 import type { DashboardAlert, DashboardKpi, SeaState, VesselMapPoint } from "./types";
 
 // API 응답을 운영 현황 카드의 표시용 타입으로 바꿉니다.
-
-const kstTime = new Intl.DateTimeFormat("ko-KR", {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "Asia/Seoul",
-});
-
-export function formatKstTime(iso: string) {
-  return kstTime.format(new Date(iso));
-}
-
-const EMPTY = "—";
 
 function formatHours(hours: number) {
   const total = Math.round(hours * 60);
@@ -80,12 +61,6 @@ export function toDashboardKpis(kpis: MvpKpis): DashboardKpi[] {
   ];
 }
 
-const MAP_STATE_TO_MARKER: Record<MvpMapState, MapMarkerStatus> = {
-  under_way: "항해 중",
-  stationary: "묘박",
-  verification_required: "검증 필요",
-};
-
 /** 지도 이미지가 덮는 위경도 범위 */
 export interface MapBounds {
   north: number;
@@ -104,7 +79,7 @@ export function toMapPoints(vessels: MvpVessel[], bounds: MapBounds): VesselMapP
     const x = ((longitude - bounds.west) / (bounds.east - bounds.west)) * 100;
     const y = ((bounds.north - latitude) / (bounds.north - bounds.south)) * 100;
     if (x < 0 || x > 100 || y < 0 || y > 100) return [];
-    return [{ id: String(vessel.mmsi), status: MAP_STATE_TO_MARKER[vessel.map_state], x, y }];
+    return [{ id: String(vessel.mmsi), status: MAP_STATE_LABELS[vessel.map_state], x, y }];
   });
 }
 
@@ -133,17 +108,6 @@ export function toSeaState(marine: MarineResponse): SeaState | null {
     ],
   };
 }
-
-const REASON_LABELS: Record<ReliabilityReasonCode, string> = {
-  position_unavailable: "위치 정보 없음",
-  position_out_of_range: "위치 범위 이탈",
-  provider_invalid: "AIS 수신 무효",
-  provider_time_reversal: "수신 시각 역전",
-  impossible_speed: "연속 위치 점프 감지",
-  sog_mismatch: "보고 속력 불일치",
-  duplicate_observation: "중복 수신",
-  provider_time_missing: "수신 시각 누락",
-};
 
 export function toDashboardAlert(alert: MvpAlert): DashboardAlert {
   // reasons 는 감점이 큰 순서로 정렬되어 옵니다.

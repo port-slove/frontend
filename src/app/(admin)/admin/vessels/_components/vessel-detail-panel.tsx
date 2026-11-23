@@ -1,9 +1,11 @@
-import { cn } from "@/shared/lib/cn";
+import Link from "next/link";
+
 import {
   AlertIcon,
   ArrowRightIcon,
   Banner,
   Button,
+  buttonClassName,
   Card,
   Chip,
   CollapseIcon,
@@ -20,8 +22,6 @@ export interface VesselDetailPanelProps {
 }
 
 export function VesselDetailPanel({ detail, onClose }: VesselDetailPanelProps) {
-  const lastIndex = detail.speedHistory.length - 1;
-
   return (
     <Card variant="outlined" className="w-100 shrink-0 gap-5">
       <div className="flex items-center justify-between gap-2">
@@ -81,35 +81,19 @@ export function VesselDetailPanel({ detail, onClose }: VesselDetailPanelProps) {
         ))}
       </div>
 
-      <section className="flex flex-col gap-2.5">
-        <h4 className="text-h4 text-primary">최근 2시간 속도</h4>
-        <div className="flex h-16 items-end gap-1.5">
-          {detail.speedHistory.map((height, index) => (
-            <div
-              // 시간순 고정 길이 배열이라 index 를 key 로 씁니다.
-              key={index}
-              className={cn("flex-1 rounded-xs", index === lastIndex ? "bg-brand" : "bg-brand-sub")}
-              style={{ height: `${height}%` }}
-            />
-          ))}
-        </div>
-        <div className="flex justify-between text-caption-sm text-tertiary">
-          <span>-2h</span>
-          <span>-1h</span>
-          <span>지금</span>
-        </div>
-      </section>
-
       <div className="flex gap-2">
-        {/* TODO: 지도 관제 / 신뢰도 검사 화면이 생기면 링크로 연결 */}
+        {/* TODO: 지도 관제 화면이 생기면 링크로 연결 */}
         <Button variant="outline" size="md" className="flex-1">
           지도에서 보기
           <MapIcon />
         </Button>
-        <Button size="md" className="flex-1 shadow-none">
+        <Link
+          href="/admin/reliability"
+          className={buttonClassName({ size: "md", className: "flex-1 shadow-none" })}
+        >
           신뢰도 검사
           <ArrowRightIcon />
-        </Button>
+        </Link>
       </div>
     </Card>
   );

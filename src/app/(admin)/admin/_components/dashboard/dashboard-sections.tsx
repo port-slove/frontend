@@ -6,11 +6,11 @@ import { PageTitle } from "@/shared/ui";
 
 import { marineQueries } from "../../_api/marine";
 import { mvpQueries } from "../../_api/mvp";
+import { formatKstTime } from "../../_lib/format";
 import { AlertsCard } from "./alerts-card";
-import { CardMessage } from "./card-message";
+import { CardMessage } from "../card-message";
 import { KpiRow } from "./kpi-row";
 import {
-  formatKstTime,
   type MapBounds,
   toDashboardAlert,
   toDashboardKpis,
