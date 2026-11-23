@@ -91,20 +91,3 @@ export const TRACKING = {
   response: "대기 중",
   resend: "미응답 10분 후 자동 (기준 미정)",
 };
-
-export const JIT_COMPARE = {
-  vessel: "HANBIT PIONEER",
-  code: "HBP2611",
-  targetEtaNote: "Target ETA 16:30 · 3부두 B2 가용 시각 기준 (하역 지연 +30분 반영)",
-  current: { speed: "13.6", arrival: "16:05", wait: "25분", fuel: "18.4 t", co2: "57.3 tCO₂" },
-  recommended: { speed: "11.6", arrival: "16:30", wait: "0분", fuel: "14.9 t", co2: "46.4 tCO₂" },
-  savings: [{ label: "대기 -25분" }, { label: "연료 -3.5 t" }, { label: "CO₂ -10.9 tCO₂" }],
-  weather: [
-    { label: "풍향", value: "NE 76°" },
-    { label: "풍속", value: "5.0 m/s" },
-    { label: "파고", value: "0.75 m" },
-    { label: "조류", value: "0.3 m/s" },
-    { label: "출력 손실", value: "-4.2%" },
-  ],
-  vsrNote: "준수 · 권고 11.6 kn ≤ 12 kn",
-};

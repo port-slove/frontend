@@ -1,7 +1,5 @@
 import axios, { type AxiosError } from "axios";
 
-import { env } from "@/shared/config/env";
-
 export interface ApiErrorBody {
   code?: string;
   message?: string;
@@ -19,8 +17,10 @@ export class ApiError extends Error {
   }
 }
 
+// 배포 환경에 백엔드 포트가 노출되지 않아, 항상 같은 오리진의 /api를 호출하고
+// next.config.ts의 rewrites가 실제 백엔드로 프록시합니다.
 export const apiClient = axios.create({
-  baseURL: env.apiBaseUrl,
+  baseURL: "/api",
   timeout: 10_000,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
