@@ -19,7 +19,7 @@ const eslintConfig = defineConfig([
   },
   // 포맷팅 규칙은 Prettier에 맡기므로 항상 마지막에 둡니다.
   prettier,
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts", ".claude/worktrees/**"]),
 ]);
 
 export default eslintConfig;
