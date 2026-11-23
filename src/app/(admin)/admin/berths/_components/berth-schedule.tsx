@@ -1,12 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 import {
   AlertIcon,
   ArrowRightIcon,
   Button,
+  Card,
   CloseIcon,
   ExpandIcon,
   PageTitle,
@@ -16,46 +17,48 @@ import {
   WarningIcon,
 } from "@/shared/ui";
 
+import { CardMessage } from "../../_components/card-message";
+import { berthQueries } from "../_api/berth-simulation";
+import { SCENARIO_PIERS } from "../_api/scenario";
 import { AssignmentDrawer } from "./assignment-drawer";
 import { BerthGantt } from "./berth-gantt";
+import {
+  filterByStatus,
+  toAssignmentDraft,
+  toGanttRange,
+  toPeriodLabel,
+  toRecommendationItem,
+  toScheduleItems,
+  toScheduleSummary,
+  toStatusLabels,
+} from "./mappers";
 import { ScheduleFilters } from "./schedule-filters";
 import type {
   AppliedFilter,
-  AssignmentDraft,
   BerthStatusFilter,
-  GanttRange,
-  Pier,
   ScheduleFilterValues,
-  ScheduleItem,
   ScheduleToast,
 } from "./types";
 
 export interface BerthScheduleProps {
-  summary: string;
-  filterValues: ScheduleFilterValues;
-  statusLabels: Record<BerthStatusFilter, string>;
+  filterValues: Omit<ScheduleFilterValues, "period">;
   initialFilters: AppliedFilter[];
-  range: GanttRange;
-  piers: Pier[];
-  items: ScheduleItem[];
-  assignment: AssignmentDraft;
   toasts: ScheduleToast[];
 }
 
+const EMPTY_STATUS_LABELS = toStatusLabels([]);
+
 export function BerthSchedule({
-  summary,
   filterValues,
-  statusLabels,
   initialFilters,
-  range,
-  piers,
-  items,
-  assignment,
   toasts: initialToasts,
 }: BerthScheduleProps) {
-  const router = useRouter();
+  const queryClient = useQueryClient();
+  const timeline = useQuery(berthQueries.timeline());
+  const recommendation = useQuery(berthQueries.recommendation());
+
   const [detailEnabled, setDetailEnabled] = useState(true);
-  // TODO: API 연동 시 상태·검색 필터를 쿼리 파라미터로 넘겨 스케줄을 다시 조회합니다.
+  // TODO: 검색 필터는 선석 일정 API 가 생기면 쿼리로 넘깁니다.
   const [status, setStatus] = useState<BerthStatusFilter>("전체");
   const [filters, setFilters] = useState(initialFilters);
   const [drawerOpen, setDrawerOpen] = useState(true);
@@ -66,6 +69,18 @@ export function BerthSchedule({
       prev.some((f) => f.value === query) ? prev : [...prev, { field: "선명", value: query }],
     );
   };
+
+  const range = timeline.data ? toGanttRange(timeline.data) : null;
+  const scheduleItems = timeline.data ? toScheduleItems(timeline.data) : [];
+  const recommendItem = recommendation.data ? toRecommendationItem(recommendation.data) : null;
+  const items = recommendItem ? [...scheduleItems, recommendItem] : scheduleItems;
+  const draft = recommendation.data ? toAssignmentDraft(recommendation.data) : null;
+
+  let summary = "불러오는 중";
+  if (range) summary = toScheduleSummary(range);
+  else if (timeline.isError) summary = "갱신 실패";
+
+  const refresh = () => queryClient.invalidateQueries({ queryKey: berthQueries.all() });
 
   const removeFilter = (target: AppliedFilter) => {
     setFilters((prev) =>
@@ -83,7 +98,7 @@ export function BerthSchedule({
             크게보기
             <ExpandIcon />
           </Button>
-          <Button variant="outline" size="md" onClick={() => router.refresh()}>
+          <Button variant="outline" size="md" onClick={refresh}>
             데이터 새로고침
             <RefreshIcon />
           </Button>
@@ -99,8 +114,8 @@ export function BerthSchedule({
       </div>
 
       <ScheduleFilters
-        values={filterValues}
-        statusLabels={statusLabels}
+        values={{ ...filterValues, period: range ? toPeriodLabel(range) : "—" }}
+        statusLabels={timeline.data ? toStatusLabels(items) : EMPTY_STATUS_LABELS}
         status={status}
         onStatusChange={setStatus}
         filters={filters}
@@ -110,8 +125,44 @@ export function BerthSchedule({
       />
 
       <div className="flex items-stretch gap-4">
-        <BerthGantt range={range} piers={piers} items={items} detailEnabled={detailEnabled} />
-        {drawerOpen && <AssignmentDrawer draft={assignment} onClose={() => setDrawerOpen(false)} />}
+        {range ? (
+          <BerthGantt
+            range={range}
+            piers={SCENARIO_PIERS}
+            items={filterByStatus(items, status)}
+            detailEnabled={detailEnabled}
+          />
+        ) : (
+          <Card variant="outlined" className="min-h-120 min-w-0 flex-1">
+            {timeline.isError ? (
+              <CardMessage
+                message="스케줄을 불러오지 못했어요"
+                onRetry={() => timeline.refetch()}
+              />
+            ) : (
+              <CardMessage message="스케줄을 불러오는 중" />
+            )}
+          </Card>
+        )}
+        {drawerOpen &&
+          (draft ? (
+            <AssignmentDrawer
+              key={recommendation.dataUpdatedAt}
+              draft={draft}
+              onClose={() => setDrawerOpen(false)}
+            />
+          ) : (
+            <Card variant="outlined" className="w-106 shrink-0">
+              {recommendation.isError ? (
+                <CardMessage
+                  message="배정 추천을 불러오지 못했어요"
+                  onRetry={() => recommendation.refetch()}
+                />
+              ) : (
+                <CardMessage message="배정 추천을 계산하는 중" />
+              )}
+            </Card>
+          ))}
       </div>
 
       {toasts.length > 0 && (
