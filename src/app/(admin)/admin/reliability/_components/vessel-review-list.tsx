@@ -1,5 +1,16 @@
-import { AlertItem, CardHeader } from "@/shared/ui";
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+
+import { AlertItem, CardHeader, Chip } from "@/shared/ui";
+import { ApiError } from "@/shared/api/client";
 import { cn } from "@/shared/lib/cn";
+import {
+  formatReasons,
+  formatTime,
+  liveReviewQueries,
+  selectFlaggedVessels,
+} from "../_api/live-review-vessels";
 import { NEEDS_REVIEW, RESOLVED_TODAY } from "./reliability-mock-data";
 
 function WarningIcon() {
@@ -32,6 +43,9 @@ function CheckIcon() {
 }
 
 export function VesselReviewList() {
+  const { data, isPending, error } = useQuery(liveReviewQueries.incheon());
+  const flagged = data ? selectFlaggedVessels(data.vessels) : [];
+
   return (
     <div className="flex w-90 shrink-0 flex-col gap-2 rounded-2xl border border-default bg-surface p-4">
       <CardHeader
@@ -49,6 +63,34 @@ export function VesselReviewList() {
             title={item.title}
             meta={item.meta}
             time={item.time}
+          />
+        </div>
+      ))}
+
+      <div className="h-px w-full border-t border-default" />
+      <div className="flex items-center gap-2">
+        <p className="text-label-md text-secondary">실시간 확인 필요</p>
+        <Chip tone="brand">인천항 실제 AIS</Chip>
+      </div>
+      {isPending && <p className="px-3 text-caption-md text-secondary">선박 조회 중...</p>}
+      {error && (
+        <p className="px-3 text-caption-md text-error">
+          {error instanceof ApiError ? error.message : "선박 목록을 불러오지 못했습니다"}
+        </p>
+      )}
+      {data && flagged.length === 0 && (
+        <p className="px-3 text-caption-md text-secondary">
+          지금 신뢰도 100점 미만인 선박이 없어요.
+        </p>
+      )}
+      {flagged.map((vessel) => (
+        <div key={vessel.mmsi} className="px-3 py-1">
+          <AlertItem
+            severity="warning"
+            icon={<WarningIcon />}
+            title={`MMSI ${vessel.mmsi} · ${vessel.reliability.score}점`}
+            meta={formatReasons(vessel.reliability.reasons)}
+            time={formatTime(vessel.received_at_utc)}
           />
         </div>
       ))}
