@@ -5,12 +5,10 @@ import { useQuery } from "@tanstack/react-query";
 import { AlertItem, CardHeader, Chip } from "@/shared/ui";
 import { ApiError } from "@/shared/api/client";
 import { cn } from "@/shared/lib/cn";
-import {
-  formatReasons,
-  formatTime,
-  liveReviewQueries,
-  selectFlaggedVessels,
-} from "../_api/live-review-vessels";
+import { aisQueries, toShipNameMap } from "../../_api/ais";
+import { ADMIN_PORT, mvpQueries } from "../../_api/mvp";
+import { formatKstTime } from "../../_lib/format";
+import { REASON_LABELS, trustTone } from "../../_lib/reliability";
 import { NEEDS_REVIEW, RESOLVED_TODAY } from "./reliability-mock-data";
 
 function WarningIcon() {
@@ -43,8 +41,11 @@ function CheckIcon() {
 }
 
 export function VesselReviewList() {
-  const { data, isPending, error } = useQuery(liveReviewQueries.incheon());
-  const flagged = data ? selectFlaggedVessels(data.vessels) : [];
+  const alertsQuery = useQuery(mvpQueries.alerts(ADMIN_PORT));
+  const positionsQuery = useQuery(aisQueries.positions());
+  const shipNames = positionsQuery.data
+    ? toShipNameMap(positionsQuery.data)
+    : new Map<number, string>();
 
   return (
     <div className="flex w-90 shrink-0 flex-col gap-2 rounded-2xl border border-default bg-surface p-4">
@@ -72,25 +73,29 @@ export function VesselReviewList() {
         <p className="text-label-md text-secondary">실시간 확인 필요</p>
         <Chip tone="brand">인천항 실제 AIS</Chip>
       </div>
-      {isPending && <p className="px-3 text-caption-md text-secondary">선박 조회 중...</p>}
-      {error && (
+      {alertsQuery.isPending && (
+        <p className="px-3 text-caption-md text-secondary">선박 조회 중...</p>
+      )}
+      {alertsQuery.error && (
         <p className="px-3 text-caption-md text-error">
-          {error instanceof ApiError ? error.message : "선박 목록을 불러오지 못했습니다"}
+          {alertsQuery.error instanceof ApiError
+            ? alertsQuery.error.message
+            : "선박 목록을 불러오지 못했습니다"}
         </p>
       )}
-      {data && flagged.length === 0 && (
+      {alertsQuery.data && alertsQuery.data.alerts.length === 0 && (
         <p className="px-3 text-caption-md text-secondary">
-          지금 신뢰도 100점 미만인 선박이 없어요.
+          지금 신뢰도 40점 미만이거나 항적 이상인 선박이 없어요.
         </p>
       )}
-      {flagged.map((vessel) => (
-        <div key={vessel.mmsi} className="px-3 py-1">
+      {alertsQuery.data?.alerts.map((alert) => (
+        <div key={alert.mmsi} className="px-3 py-1">
           <AlertItem
-            severity="warning"
+            severity={trustTone(alert.score)}
             icon={<WarningIcon />}
-            title={`MMSI ${vessel.mmsi} · ${vessel.reliability.score}점`}
-            meta={formatReasons(vessel.reliability.reasons)}
-            time={formatTime(vessel.received_at_utc)}
+            title={`${shipNames.get(alert.mmsi) ?? `MMSI ${alert.mmsi}`} · ${alert.score}점`}
+            meta={alert.reasons.map((r) => REASON_LABELS[r.code]).join(" · ")}
+            time={formatKstTime(alert.received_at_utc)}
           />
         </div>
       ))}
