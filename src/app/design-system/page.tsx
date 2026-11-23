@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import {
   ActionOption,
   AlertIcon,
+  AnchorIcon,
   AlertItem,
   ArrowRightIcon,
   Avatar,
@@ -15,7 +16,9 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
+  CheckIcon,
   ChevronDownIcon,
+  CloseIcon,
   CollapseIcon,
   Chip,
   CompareCard,
@@ -42,6 +45,7 @@ import {
   PropertyRow,
   ScheduleBlock,
   Segmented,
+  RefreshIcon,
   SearchIcon,
   SelectField,
   StatTile,
@@ -548,6 +552,10 @@ export default function DesignSystemPage() {
           <MapIcon />
           <AlertIcon />
           <WarningIcon />
+          <RefreshIcon />
+          <CloseIcon />
+          <AnchorIcon />
+          <CheckIcon />
         </div>
         <Progress tone="brand" value={60} className="w-40" />
         <div className="flex max-w-100 flex-col">

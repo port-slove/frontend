@@ -1,6 +1,6 @@
 "use client";
 
-import type { ComponentProps } from "react";
+import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/shared/lib/cn";
 import { Tab } from "./tab";
@@ -9,6 +9,8 @@ export interface SegmentedProps<T extends string> extends Omit<ComponentProps<"d
   options: readonly T[];
   value: T;
   onValueChange?: (value: T) => void;
+  /** 값과 다른 문구(예: 개수 포함)를 보여줄 때 사용합니다. */
+  renderLabel?: (option: T) => ReactNode;
 }
 
 /** 탭 여러 개를 묶은 단일 선택 컨트롤 (Figma: Segmented) */
@@ -16,6 +18,7 @@ export function Segmented<T extends string>({
   options,
   value,
   onValueChange,
+  renderLabel,
   className,
   ...props
 }: SegmentedProps<T>) {
@@ -33,7 +36,7 @@ export function Segmented<T extends string>({
           active={option === value}
           onClick={() => onValueChange?.(option)}
         >
-          {option}
+          {renderLabel ? renderLabel(option) : option}
         </Tab>
       ))}
     </div>

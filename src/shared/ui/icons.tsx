@@ -230,3 +230,74 @@ export function WarningIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function RefreshIcon(props: IconProps) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden {...props}>
+      <path
+        d="M13.3333 7.33333C13.3201 6.10024 12.8799 4.90985 12.0877 3.96477C11.2956 3.01968 10.2004 2.37831 8.98859 2.1498C7.77678 1.92129 6.52323 2.11977 5.44129 2.71147C4.35935 3.30316 3.51588 4.25149 3.05444 5.39507C2.593 6.53864 2.5421 7.80678 2.9104 8.98366C3.27871 10.1605 4.04346 11.1734 5.0745 11.8499C6.10554 12.5264 7.33915 12.8247 8.56537 12.6941C9.79159 12.5634 10.9347 12.0119 11.8 11.1333"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M13.3333 2.66667V7.33333H8.66667"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+/** Figma 에서 20/16/14px 로 쓰이며 경로 비율이 같아 하나로 두고 size-* 로 줄입니다. */
+export function CloseIcon(props: IconProps) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden {...props}>
+      <path
+        d="M5 5L15 15M15 5L5 15"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function AnchorIcon(props: IconProps) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden {...props}>
+      <path
+        d="M11.6667 4.16667C11.6667 5.08714 10.9205 5.83333 10 5.83333C9.07953 5.83333 8.33333 5.08714 8.33333 4.16667C8.33333 3.24619 9.07953 2.5 10 2.5C10.9205 2.5 11.6667 3.24619 11.6667 4.16667Z"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 5.83333V9.16667M10 9.16667V17.5M10 9.16667H6.66667M10 9.16667H13.3333M10 17.5C8.01088 17.5 6.10322 16.7098 4.6967 15.3033C3.29018 13.8968 2.5 11.9891 2.5 10H4.16667M10 17.5C11.9891 17.5 13.8968 16.7098 15.3033 15.3033C16.7098 13.8968 17.5 11.9891 17.5 10H15.8333"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export function CheckIcon(props: IconProps) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden {...props}>
+      <path
+        d="M3.33333 8L6.66667 11.3333L12.6667 4.66667"
+        stroke="currentColor"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
