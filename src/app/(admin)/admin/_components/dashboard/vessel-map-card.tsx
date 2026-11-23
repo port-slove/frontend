@@ -6,6 +6,7 @@ import {
   CardHeader,
   Chip,
   ExpandIcon,
+  LegendItem,
   MAP_MARKER_STATUSES,
   MapMarker,
 } from "@/shared/ui";
@@ -43,14 +44,11 @@ export function VesselMapCard({ points, total }: { points: VesselMapPoint[]; tot
         ))}
       </div>
 
-      <ul className="flex gap-5">
+      <div className="flex gap-5">
         {MAP_MARKER_STATUSES.map((status) => (
-          <li key={status} className="flex items-center gap-1.5">
-            <MapMarker status={status} />
-            <span className="text-caption-md text-secondary">{status}</span>
-          </li>
+          <LegendItem key={status} status={status} label={status} />
         ))}
-      </ul>
+      </div>
     </Card>
   );
 }

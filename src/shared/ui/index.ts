@@ -27,6 +27,7 @@ export { InfoChip, type InfoChipProps } from "./info-chip";
 export { Input, type InputProps } from "./input";
 export { KpiCard, type KpiCardProps } from "./kpi-card";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
+export { LegendItem, type LegendItemProps } from "./legend-item";
 export {
   MAP_MARKER_STATUSES,
   MapMarker,

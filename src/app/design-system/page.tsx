@@ -35,8 +35,8 @@ import {
   Input,
   KpiCard,
   LayerToggle,
+  LegendItem,
   LogoIcon,
-  MAP_MARKER_STATUSES,
   MapIcon,
   MapMarker,
   NotificationPanel,
@@ -446,6 +446,18 @@ export default function DesignSystemPage() {
           value="전체"
           className="self-start border border-default"
         />
+        <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
+          <MapMarker status="항해 중" />
+          <MapMarker status="대기 예상" />
+          <MapMarker status="묘박" />
+          <MapMarker status="검증 필요" />
+        </div>
+        <div className="flex flex-wrap items-center gap-4">
+          <LegendItem status="항해 중" label="항해 중" />
+          <LegendItem status="대기 예상" label="대기 예상" />
+          <LegendItem status="묘박" label="묘박" />
+          <LegendItem status="검증 필요" label="검증 필요" />
+        </div>
         <div className="flex flex-wrap items-start gap-3">
           <ScheduleBlock
             status="하역 중"
@@ -530,14 +542,6 @@ export default function DesignSystemPage() {
             icon={<IconCircle tone="error" icon={<AlertIcon />} />}
             className="w-85"
           />
-        </div>
-        <div className="flex flex-wrap items-center gap-5">
-          {MAP_MARKER_STATUSES.map((status) => (
-            <span key={status} className="flex items-center gap-1.5 text-caption-md text-secondary">
-              <MapMarker status={status} />
-              {status}
-            </span>
-          ))}
         </div>
         <div className="flex flex-wrap items-center gap-3 text-primary">
           <LogoIcon />
