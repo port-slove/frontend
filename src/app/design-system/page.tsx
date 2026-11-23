@@ -2,9 +2,13 @@ import { notFound } from "next/navigation";
 
 import {
   ActionOption,
+  AlertIcon,
+  AnchorIcon,
   AlertItem,
+  ArrowRightIcon,
   Avatar,
   Banner,
+  BellIcon,
   BerthTile,
   Button,
   Card,
@@ -12,11 +16,17 @@ import {
   CardHeader,
   CardTitle,
   Checkbox,
+  CheckIcon,
+  ChevronDownIcon,
+  CloseIcon,
+  CollapseIcon,
   Chip,
   CompareCard,
   ConfirmDialog,
   DateRange,
   DeductionRow,
+  ExpandIcon,
+  ExportIcon,
   FilterChip,
   Header,
   HistoryStep,
@@ -26,12 +36,17 @@ import {
   KpiCard,
   LayerToggle,
   LegendItem,
+  LogoIcon,
+  MapIcon,
   MapMarker,
   NotificationPanel,
   PageTitle,
   Progress,
   PropertyRow,
   ScheduleBlock,
+  Segmented,
+  RefreshIcon,
+  SearchIcon,
   SelectField,
   StatTile,
   Tab,
@@ -45,6 +60,8 @@ import {
   Toggle,
   Tooltip,
   TooltipRow,
+  UserIcon,
+  WarningIcon,
 } from "@/shared/ui";
 
 // 아이콘 시스템 도입 전 미리보기 전용 placeholder (실제 컴포넌트는 아이콘을 prop으로 전달받음)
@@ -383,6 +400,14 @@ export default function DesignSystemPage() {
           <Button variant="danger">Danger</Button>
           <Button variant="dark">Dark</Button>
           <Button disabled>Disabled</Button>
+          <Button variant="outline" size="md">
+            Outline md
+            <ArrowRightIcon />
+          </Button>
+          <Button variant="ghost" size="md">
+            Ghost md
+            <ArrowRightIcon />
+          </Button>
           <Chip>Neutral</Chip>
           <Chip tone="brand">Brand</Chip>
           <Chip tone="success">Success</Chip>
@@ -416,6 +441,11 @@ export default function DesignSystemPage() {
           <Tab>입항</Tab>
           <Tab>출항</Tab>
         </div>
+        <Segmented
+          options={["전체", "VSR 해역 내", "묘박"]}
+          value="전체"
+          className="self-start border border-default"
+        />
         <div className="flex items-center gap-4 rounded-2xl bg-gray-900 p-4">
           <MapMarker status="항해 중" />
           <MapMarker status="대기 예상" />
@@ -503,6 +533,33 @@ export default function DesignSystemPage() {
             sub="1시간 전 21"
             className="w-85"
           />
+          <KpiCard
+            label="지표명"
+            value="8"
+            unit="건"
+            delta="↑ 3"
+            sub="아이콘 포함"
+            icon={<IconCircle tone="error" icon={<AlertIcon />} />}
+            className="w-85"
+          />
+        </div>
+        <div className="flex flex-wrap items-center gap-3 text-primary">
+          <LogoIcon />
+          <SearchIcon />
+          <BellIcon />
+          <UserIcon />
+          <ChevronDownIcon />
+          <ArrowRightIcon />
+          <ExportIcon />
+          <ExpandIcon />
+          <CollapseIcon />
+          <MapIcon />
+          <AlertIcon />
+          <WarningIcon />
+          <RefreshIcon />
+          <CloseIcon />
+          <AnchorIcon />
+          <CheckIcon />
         </div>
         <Progress tone="brand" value={60} className="w-40" />
         <div className="flex max-w-100 flex-col">
@@ -611,6 +668,10 @@ export default function DesignSystemPage() {
         <Card className="w-90">
           <CardTitle>Card Layout</CardTitle>
           <CardDescription>rounded xl, soft blue shadow, 24 padding</CardDescription>
+        </Card>
+        <Card variant="outlined" className="w-90">
+          <CardTitle>Card outlined</CardTitle>
+          <CardDescription>border default, rounded 2xl, 16 padding</CardDescription>
         </Card>
       </Section>
     </main>

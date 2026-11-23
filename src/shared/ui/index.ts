@@ -3,8 +3,15 @@ export { AlertItem, type AlertItemProps } from "./alert-item";
 export { Avatar, type AvatarProps } from "./avatar";
 export { Banner, type BannerProps, type BannerTone } from "./banner";
 export { BerthTile, type BerthTileProps } from "./berth-tile";
-export { Button, type ButtonProps, type ButtonVariant } from "./button";
-export { Card, CardDescription, CardTitle } from "./card";
+export {
+  Button,
+  type ButtonClassOptions,
+  buttonClassName,
+  type ButtonProps,
+  type ButtonSize,
+  type ButtonVariant,
+} from "./button";
+export { Card, CardDescription, type CardProps, CardTitle, type CardVariant } from "./card";
 export { CardHeader, type CardHeaderProps } from "./card-header";
 export { Checkbox, type CheckboxProps } from "./checkbox";
 export { Chip, type ChipProps, type ChipTone } from "./chip";
@@ -21,7 +28,12 @@ export { Input, type InputProps } from "./input";
 export { KpiCard, type KpiCardProps } from "./kpi-card";
 export { LayerToggle, type LayerToggleProps } from "./layer-toggle";
 export { LegendItem, type LegendItemProps } from "./legend-item";
-export { MapMarker, type MapMarkerProps, type MapMarkerStatus } from "./map-marker";
+export {
+  MAP_MARKER_STATUSES,
+  MapMarker,
+  type MapMarkerProps,
+  type MapMarkerStatus,
+} from "./map-marker";
 export {
   NotificationItem,
   type NotificationItemProps,
@@ -36,6 +48,7 @@ export { PageTitle, type PageTitleProps } from "./page-title";
 export { Progress, type ProgressProps, type ProgressTone } from "./progress";
 export { PropertyRow, type PropertyRowProps } from "./property-row";
 export { ScheduleBlock, type ScheduleBlockProps, type ScheduleBlockStatus } from "./schedule-block";
+export { Segmented, type SegmentedProps } from "./segmented";
 export { SelectField, type SelectFieldProps } from "./select-field";
 export { StatTile, type StatTileProps } from "./stat-tile";
 export { Tab, type TabProps } from "./tab";
@@ -49,3 +62,22 @@ export { Toast, type ToastProps, type ToastTone } from "./toast";
 export { Toggle, type ToggleProps } from "./toggle";
 export { Tooltip, type TooltipProps } from "./tooltip";
 export { TooltipRow, type TooltipRowProps } from "./tooltip-row";
+export {
+  AlertIcon,
+  AnchorIcon,
+  ArrowRightIcon,
+  BellIcon,
+  CheckIcon,
+  ChevronDownIcon,
+  CloseIcon,
+  CollapseIcon,
+  ExpandIcon,
+  ExportIcon,
+  type IconProps,
+  LogoIcon,
+  MapIcon,
+  RefreshIcon,
+  SearchIcon,
+  UserIcon,
+  WarningIcon,
+} from "./icons";

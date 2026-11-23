@@ -2,12 +2,12 @@
 
 import { usePathname, useRouter } from "next/navigation";
 
-import { Header, type HeaderTab } from "@/shared/ui";
+import { BellIcon, Header, type HeaderTab, LogoIcon, SearchIcon, UserIcon } from "@/shared/ui";
 
 const TAB_ROUTES: Record<HeaderTab, string> = {
   "운영 현황": "/admin",
-  "선박 모니터링": "/admin/monitoring",
-  "선석 스케줄": "/admin/schedule",
+  "선박 모니터링": "/admin/vessels",
+  "선석 스케줄": "/admin/berths",
   "입항 최적화": "/admin/optimization",
   "신뢰도 검사": "/admin/reliability",
 };
@@ -17,18 +17,14 @@ function activeTabFromPathname(pathname: string): HeaderTab {
     .filter(([, path]) => path !== "/admin")
     .find(([, path]) => pathname.startsWith(path));
 
-  return (entry?.[0] as HeaderTab) ?? "운영 현황";
+  return (entry?.[0] as HeaderTab | undefined) ?? "운영 현황";
 }
 
-function PlaceholderIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="size-5">
-      <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="2" />
-    </svg>
-  );
+export interface AdminHeaderProps {
+  userName: string;
 }
 
-export function AdminHeader() {
+export function AdminHeader({ userName }: AdminHeaderProps) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -36,11 +32,11 @@ export function AdminHeader() {
     <Header
       active={activeTabFromPathname(pathname)}
       onNavigate={(tab) => router.push(TAB_ROUTES[tab as HeaderTab])}
-      logoIcon={<PlaceholderIcon />}
-      searchIcon={<PlaceholderIcon />}
-      notificationsIcon={<PlaceholderIcon />}
-      avatarIcon={<PlaceholderIcon />}
-      userName="REVLIS"
+      logoIcon={<LogoIcon />}
+      searchIcon={<SearchIcon />}
+      notificationsIcon={<BellIcon />}
+      avatarIcon={<UserIcon className="text-brand" />}
+      userName={userName}
     />
   );
 }

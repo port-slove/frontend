@@ -2,7 +2,9 @@ import type { ComponentProps } from "react";
 
 import { cn } from "@/shared/lib/cn";
 
-export type MapMarkerStatus = "항해 중" | "대기 예상" | "묘박" | "검증 필요";
+export const MAP_MARKER_STATUSES = ["항해 중", "대기 예상", "묘박", "검증 필요"] as const;
+
+export type MapMarkerStatus = (typeof MAP_MARKER_STATUSES)[number];
 
 export interface MapMarkerProps extends ComponentProps<"div"> {
   status?: MapMarkerStatus;
