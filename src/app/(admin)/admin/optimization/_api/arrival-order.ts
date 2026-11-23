@@ -1,6 +1,7 @@
 import { queryOptions } from "@tanstack/react-query";
 
 import { apiClient } from "@/shared/api/client";
+import type { MvpVessel } from "@/app/(admin)/admin/_api/mvp";
 
 export interface ArrivalVessel {
   ship_id: string;
@@ -42,20 +43,43 @@ export interface ArrivalOrderResult {
   calls: PlannedCall[];
 }
 
-// IMO는 arrival-order 응답에 없어 화면 표시용으로만 보유합니다.
-export const VESSEL_IMO: Record<string, string> = {
-  "HANBIT PIONEER": "IMO 1234561",
-  "SEOHAE STAR": "IMO 1234567",
-  "BADA LINK": "IMO 9812345",
-  "GEUMJEONG 7": "IMO 9734120",
-  "NURI TRADER": "IMO 9655011",
-};
+// 시뮬레이션에 넣을 수 있는 선박 수(선석 후보 3곳 기준 고정값)
+export const MAX_SIMULATED_VESSELS = 4;
 
-// SEOHAE STAR는 위치 미검증 상태라 arrival-order에 넣으면 전체 계획이 통째로 보류되므로
-// (신뢰도 검사 페이지의 동일 시나리오와 일관되게) 호출 대상에서 빼고 화면에서 "보류"로 고정 표시합니다.
-export const HELD_VESSEL_ID = "SEOHAE STAR";
+// 실시간 API(mvpQueries.vessels)에는 선종·길이·흘수·서비스 소요시간이 없어
+// 당분간 고정값을 사용합니다. ship_id(MMSI)·선박명만 실데이터로 대체합니다.
+const ETA_OFFSET_MINUTES = [90, 165, 215, 265];
+const SERVICE_MINUTES = [360, 300, 420, 240];
+const SHIP_TYPES = ["container", "container", "tanker", "container"];
 
-function buildArrivalOrderInput(): {
+// 선석 후보는 아직 실시간 조회 API가 없어 당분간 고정값을 사용합니다.
+function buildSimulationBerths(minutes: (m: number) => string): BerthCandidate[] {
+  return [
+    {
+      berth_id: "3B2",
+      available_at: minutes(0),
+      max_length_m: 220,
+      max_draft_m: 12,
+      allowed_ship_types: ["container", "bulk", "tanker"],
+    },
+    {
+      berth_id: "4A1",
+      available_at: minutes(30),
+      max_length_m: 200,
+      max_draft_m: 11,
+      allowed_ship_types: ["container", "bulk", "tanker"],
+    },
+    {
+      berth_id: "3B1",
+      available_at: minutes(60),
+      max_length_m: 210,
+      max_draft_m: 12,
+      allowed_ship_types: ["container", "bulk", "tanker"],
+    },
+  ];
+}
+
+function buildArrivalOrderInput(vessels: MvpVessel[]): {
   observed_at: string;
   received_at: string;
   vessels: ArrivalVessel[];
@@ -67,78 +91,28 @@ function buildArrivalOrderInput(): {
   return {
     observed_at: now.toISOString(),
     received_at: now.toISOString(),
-    vessels: [
-      {
-        ship_id: "HANBIT PIONEER",
-        ship_type: "container",
-        length_m: 200,
-        draft_m: 10,
-        position_status: "verified",
-        eta: minutes(90),
-        service_minutes: 360,
-      },
-      {
-        ship_id: "BADA LINK",
-        ship_type: "container",
-        length_m: 190,
-        draft_m: 10,
-        position_status: "verified",
-        eta: minutes(165),
-        service_minutes: 300,
-      },
-      {
-        ship_id: "GEUMJEONG 7",
-        ship_type: "tanker",
-        length_m: 170,
-        draft_m: 11,
-        position_status: "verified",
-        eta: minutes(215),
-        service_minutes: 420,
-      },
-      {
-        ship_id: "NURI TRADER",
-        ship_type: "container",
-        length_m: 160,
-        draft_m: 8,
-        position_status: "verified",
-        eta: minutes(265),
-        service_minutes: 240,
-      },
-    ],
-    berths: [
-      {
-        berth_id: "3B2",
-        available_at: minutes(0),
-        max_length_m: 220,
-        max_draft_m: 12,
-        allowed_ship_types: ["container", "bulk", "tanker"],
-      },
-      {
-        berth_id: "4A1",
-        available_at: minutes(30),
-        max_length_m: 200,
-        max_draft_m: 11,
-        allowed_ship_types: ["container", "bulk", "tanker"],
-      },
-      {
-        berth_id: "3B1",
-        available_at: minutes(60),
-        max_length_m: 210,
-        max_draft_m: 12,
-        allowed_ship_types: ["container", "bulk", "tanker"],
-      },
-    ],
+    vessels: vessels.slice(0, MAX_SIMULATED_VESSELS).map((vessel, index) => ({
+      ship_id: String(vessel.mmsi),
+      ship_type: SHIP_TYPES[index] ?? "container",
+      length_m: 190,
+      draft_m: 10,
+      position_status: "verified",
+      eta: minutes(ETA_OFFSET_MINUTES[index] ?? 90 + index * 50),
+      service_minutes: SERVICE_MINUTES[index] ?? 300,
+    })),
+    berths: buildSimulationBerths(minutes),
   };
 }
 
 export const arrivalOrderQueries = {
   all: () => ["arrival-order"] as const,
-  plan: () =>
+  plan: (vessels: MvpVessel[]) =>
     queryOptions({
-      queryKey: [...arrivalOrderQueries.all(), "plan"],
+      queryKey: [...arrivalOrderQueries.all(), "plan", vessels.map((v) => v.mmsi).join(",")],
       queryFn: () =>
         apiClient
-          .post<ArrivalOrderResult>("/v1/simulation/arrival-order", buildArrivalOrderInput())
+          .post<ArrivalOrderResult>("/v1/simulation/arrival-order", buildArrivalOrderInput(vessels))
           .then((res) => res.data),
+      enabled: vessels.length > 0,
     }),
 };
