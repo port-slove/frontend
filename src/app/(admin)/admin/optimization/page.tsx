@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Button, PageTitle } from "@/shared/ui";
 import { cn } from "@/shared/lib/cn";
 import { JitCompareCard } from "./_components/jit-compare-card";
+import { LiveVesselDemoCard } from "./_components/live-vessel-demo-card";
 import { OptimizationQueueCard } from "./_components/optimization-queue-card";
 import { TrackingCard } from "./_components/tracking-card";
 
@@ -68,6 +69,8 @@ export default function Page() {
         </div>
         <JitCompareCard />
       </div>
+
+      <LiveVesselDemoCard />
     </div>
   );
 }
