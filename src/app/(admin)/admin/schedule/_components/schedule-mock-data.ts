@@ -8,6 +8,13 @@ export interface GanttBlock {
   status: ScheduleBlockStatus;
   name: string;
   meta: string;
+  detail: {
+    code: string;
+    berth: string;
+    arrival: string;
+    departure: string;
+    speed: string;
+  };
 }
 
 export interface GanttRow {
@@ -36,6 +43,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "하역 중",
             name: "HANBIT PIONEER",
             meta: "HBP2611 · 컨테이너",
+            detail: {
+              code: "HBP2611",
+              berth: "3부두 B1",
+              arrival: "11.07 01:00",
+              departure: "11.07 10:00",
+              speed: "13.6 → 11.6 kn · 감속",
+            },
           },
           {
             id: "b1-2",
@@ -44,6 +58,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "접안 예정",
             name: "SEOHAE STAR",
             meta: "SHS1123 · 벌크",
+            detail: {
+              code: "SHS1123",
+              berth: "3부두 B1",
+              arrival: "11.07 12:00",
+              departure: "11.07 22:00",
+              speed: "12.1 → 12.1 kn · 유지",
+            },
           },
         ],
       },
@@ -57,6 +78,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "하역 중",
             name: "GEUMJEONG 7",
             meta: "GJ0007 · 탱커",
+            detail: {
+              code: "GJ0007",
+              berth: "3부두 B2",
+              arrival: "11.07 03:00",
+              departure: "11.07 14:00",
+              speed: "11.4 → 9.8 kn · 감속",
+            },
           },
           {
             id: "b2-2",
@@ -65,6 +93,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "대기 예상",
             name: "BADA LINK",
             meta: "BDL4502 · 컨테이너",
+            detail: {
+              code: "BDL4502",
+              berth: "3부두 B2",
+              arrival: "11.07 16:00",
+              departure: "11.08 04:00",
+              speed: "14.2 → 14.2 kn · 유지",
+            },
           },
         ],
       },
@@ -78,6 +113,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "지연",
             name: "BLUE WAVE",
             meta: "BLW2290 · 벌크",
+            detail: {
+              code: "BLW2290",
+              berth: "3부두 B3",
+              arrival: "11.07 05:00",
+              departure: "11.07 17:00",
+              speed: "10.5 → 8.2 kn · 감속",
+            },
           },
         ],
       },
@@ -97,6 +139,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "보류",
             name: "ORION SUN",
             meta: "ORS7781 · 컨테이너",
+            detail: {
+              code: "ORS7781",
+              berth: "4부두 A1",
+              arrival: "11.06 00:00",
+              departure: "11.07 09:00",
+              speed: "9.0 → 9.0 kn · 유지",
+            },
           },
           {
             id: "a1-2",
@@ -105,6 +154,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "하역 중",
             name: "NEPTUNE 3",
             meta: "NPT0033 · 탱커",
+            detail: {
+              code: "NPT0033",
+              berth: "4부두 A1",
+              arrival: "11.08 00:00",
+              departure: "11.08 12:00",
+              speed: "12.8 → 11.0 kn · 감속",
+            },
           },
         ],
       },
@@ -118,6 +174,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "추천",
             name: "SILVER TIDE",
             meta: "SLT1890 · 벌크",
+            detail: {
+              code: "SLT1890",
+              berth: "4부두 A2",
+              arrival: "11.07 10:00",
+              departure: "11.08 00:00",
+              speed: "13.0 → 11.5 kn · 감속",
+            },
           },
         ],
       },
@@ -131,6 +194,13 @@ export const MOCK_BERTH_GROUPS: GanttGroup[] = [
             status: "접안 예정",
             name: "GOLDEN BAY",
             meta: "GLB4471 · 컨테이너",
+            detail: {
+              code: "GLB4471",
+              berth: "4부두 A3",
+              arrival: "11.07 18:00",
+              departure: "11.08 08:00",
+              speed: "14.5 → 14.5 kn · 유지",
+            },
           },
         ],
       },

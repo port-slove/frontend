@@ -1,4 +1,4 @@
-import { ScheduleBlock } from "@/shared/ui";
+import { ScheduleBlock, Tooltip } from "@/shared/ui";
 import { cn } from "@/shared/lib/cn";
 import type { GanttGroup } from "./schedule-mock-data";
 
@@ -92,15 +92,32 @@ export function BerthGantt({ groups }: BerthGanttProps) {
                     />
                   ))}
                   {row.blocks.map((block) => (
-                    <ScheduleBlock
+                    <div
                       key={block.id}
-                      status={block.status}
-                      time={`${formatHour(block.start)} – ${formatHour(block.end)}`}
-                      name={block.name}
-                      meta={block.meta}
-                      className="absolute top-2.5"
+                      className="group absolute top-2.5"
                       style={{ left: pct(block.start), width: pct(block.end - block.start) }}
-                    />
+                    >
+                      <ScheduleBlock
+                        status={block.status}
+                        time={`${formatHour(block.start)} – ${formatHour(block.end)}`}
+                        name={block.name}
+                        meta={block.meta}
+                        className="w-full"
+                      />
+                      <Tooltip
+                        label="선박명"
+                        title={block.name}
+                        code={`(${block.detail.code})`}
+                        rows={[
+                          { label: "상태", value: block.status },
+                          { label: "선석", value: block.detail.berth },
+                          { label: "접안 예정", value: block.detail.arrival },
+                          { label: "출항 예정", value: block.detail.departure },
+                          { label: "권고 속도", value: block.detail.speed },
+                        ]}
+                        className="pointer-events-none invisible absolute top-full left-0 z-20 mt-2 opacity-0 transition-opacity group-hover:visible group-hover:opacity-100"
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
