@@ -18,7 +18,6 @@ export interface VesselMapCardProps {
   points: VesselMapPoint[];
   total: number;
   image: { src: string; alt: string };
-  /** 지도 위에 띄우는 로딩·에러 안내 */
   overlay?: ReactNode;
 }
 

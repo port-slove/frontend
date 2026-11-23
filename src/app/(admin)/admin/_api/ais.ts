@@ -2,9 +2,6 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { apiClient } from "@/shared/api/client";
 
-// GET /v1/ais/positions (OpenAPI: LiveAisResponse)
-// raw 는 AISStream 메시지 원본입니다. 화면에서는 MetaData 의 MMSI·선명만 씁니다.
-
 export interface AisStreamMetaData {
   MMSI: number;
   ShipName?: string;
@@ -51,7 +48,6 @@ export const aisQueries = {
     }),
 };
 
-/** MMSI → 선명. AISStream 이 선명을 공백으로 채워 보내므로 trim 합니다. */
 export function toShipNameMap(response: LiveAisResponse) {
   const names = new Map<number, string>();
   for (const position of response.positions ?? []) {

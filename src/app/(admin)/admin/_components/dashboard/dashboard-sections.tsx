@@ -21,9 +21,6 @@ import { SeaStateCard } from "./sea-state-card";
 import type { DashboardKpi } from "./types";
 import { VesselMapCard } from "./vessel-map-card";
 
-// 운영 현황에서 API 를 읽는 카드들. apiClient 가 같은 오리진의 /api 를 호출하므로
-// 브라우저에서만 요청할 수 있어 클라이언트 컴포넌트로 둡니다.
-
 const LOAD_ERROR = "데이터를 불러오지 못했어요";
 
 export function DashboardTitle() {
@@ -44,14 +41,10 @@ const KPI_PLACEHOLDER: DashboardKpi[] = [
 
 export function KpiSection() {
   const { data } = useQuery(mvpQueries.kpis());
-  // 불러오는 중이거나 실패하면 값을 비워 두고, 상태는 페이지 제목의 갱신 문구로 알립니다.
   return <KpiRow items={data ? toDashboardKpis(data) : KPI_PLACEHOLDER} />;
 }
 
-/**
- * 인천항 지도 영역(888×412 비율)이 덮는 위경도 범위.
- * TODO: 지금 이미지는 Figma 의 부산항 지도입니다. 이 범위로 잘라 낸 인천항 지도 이미지로 교체해야 합니다.
- */
+// TODO: 부산항 이미지입니다. bounds 범위(888×412 비율)의 인천항 지도로 교체해야 합니다.
 const PORT_MAP = {
   image: { src: "/images/admin/port-map.png", alt: "인천항 주변 지도" },
   bounds: { north: 37.55, south: 37.3, west: 126.21, east: 126.89 } satisfies MapBounds,
@@ -89,7 +82,6 @@ export function SeaStateSection() {
   return <SeaStateCard seaState={seaState ?? undefined} message={message} />;
 }
 
-/** 카드 높이에 맞춰 위에서부터 보여 주는 알림 수 */
 const VISIBLE_ALERTS = 3;
 
 export function AlertsSection() {

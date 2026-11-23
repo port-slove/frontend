@@ -2,7 +2,6 @@ import type { ChipTone } from "@/shared/ui";
 
 import type { MvpMapState, ReliabilityReasonCode } from "../_api/mvp";
 
-/** 백엔드 신뢰도 감점 사유(app/mvp_core.py PENALTIES) 표시 문구 */
 export const REASON_LABELS: Record<ReliabilityReasonCode, string> = {
   position_unavailable: "위치 정보 없음",
   position_out_of_range: "위치 범위 이탈",
@@ -20,7 +19,7 @@ export const MAP_STATE_LABELS = {
   verification_required: "검증 필요",
 } as const satisfies Record<MvpMapState, string>;
 
-/** 백엔드 경고 기준(ALERT_SCORE_THRESHOLD)이 40점입니다. 70점 이상은 양호로 봅니다. */
+// 40점: 백엔드 ALERT_SCORE_THRESHOLD
 export function trustTone(score: number): Extract<ChipTone, "success" | "warning" | "error"> {
   if (score < 40) return "error";
   if (score < 70) return "warning";

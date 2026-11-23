@@ -6,7 +6,6 @@ import type { SeaState } from "./types";
 
 export interface SeaStateCardProps {
   seaState?: SeaState;
-  /** seaState 대신 보여 줄 로딩·빈 상태·에러 안내 */
   message?: ReactNode;
 }
 

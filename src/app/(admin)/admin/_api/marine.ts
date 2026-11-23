@@ -2,8 +2,6 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { apiClient } from "@/shared/api/client";
 
-// GET /v1/marine-observation (OpenAPI: MarineResponse)
-
 export interface MarineObservation {
   station_id: string;
   observed_at: string;

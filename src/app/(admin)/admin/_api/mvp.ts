@@ -2,15 +2,13 @@ import { queryOptions } from "@tanstack/react-query";
 
 import { apiClient } from "@/shared/api/client";
 
-// 백엔드 app/api/mvp_routes.py 의 응답 형태를 옮긴 타입입니다.
-// OpenAPI 문서에는 응답 스키마가 비어 있어(string) 소스 코드를 기준으로 정의했습니다.
+// OpenAPI 에 응답 스키마가 없어 백엔드 app/api/mvp_routes.py 를 기준으로 정의했습니다.
 
 export type PortCode = "incheon" | "busan";
 
-/** 실제 AIS 관측이 쌓여 있는 항만. 부산은 아직 관측 데이터가 없습니다. */
+// 부산항은 아직 AIS 관측 데이터가 없습니다.
 export const ADMIN_PORT: PortCode = "incheon";
 
-/** 화면이 안내하는 자동 갱신 주기(5분)와 맞춥니다. */
 const REFETCH_INTERVAL = 5 * 60 * 1000;
 
 export type ReliabilityReasonCode =

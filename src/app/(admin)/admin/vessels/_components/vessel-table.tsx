@@ -20,7 +20,6 @@ export interface VesselTableProps {
   total: number;
   selectedId: string | null;
   onSelect: (id: string | null) => void;
-  /** 행 대신 보여 줄 로딩·빈 상태·에러 안내 */
   message?: ReactNode;
 }
 
@@ -35,7 +34,6 @@ export function VesselTable({ vessels, total, selectedId, onSelect, message }: V
         </Button>
       </div>
 
-      {/* 선박이 수백 척이라 표 영역만 스크롤합니다. */}
       <div className="max-h-160 overflow-y-auto">
         <table className="w-full table-fixed border-separate border-spacing-0">
           <colgroup>

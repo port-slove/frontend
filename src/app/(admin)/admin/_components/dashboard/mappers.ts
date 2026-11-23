@@ -4,14 +4,12 @@ import { EMPTY_VALUE as EMPTY, formatKstTime } from "../../_lib/format";
 import { MAP_STATE_LABELS, REASON_LABELS } from "../../_lib/reliability";
 import type { DashboardAlert, DashboardKpi, SeaState, VesselMapPoint } from "./types";
 
-// API 응답을 운영 현황 카드의 표시용 타입으로 바꿉니다.
-
 function formatHours(hours: number) {
   const total = Math.round(hours * 60);
   return `${Math.floor(total / 60)}h ${total % 60}m`;
 }
 
-/** 백엔드 ARRIVAL_RADIUS_NM(A6). 접근 선박은 이 반경 안의 최신 관측 선박입니다. */
+// 백엔드 ARRIVAL_RADIUS_NM
 const ARRIVAL_RADIUS_NM = 30;
 
 export function toDashboardKpis(kpis: MvpKpis): DashboardKpi[] {
@@ -61,7 +59,6 @@ export function toDashboardKpis(kpis: MvpKpis): DashboardKpi[] {
   ];
 }
 
-/** 지도 이미지가 덮는 위경도 범위 */
 export interface MapBounds {
   north: number;
   south: number;
@@ -69,10 +66,6 @@ export interface MapBounds {
   east: number;
 }
 
-/**
- * 위경도를 지도 이미지 기준 % 좌표로 환산합니다. 범위를 벗어난 선박은 제외합니다.
- * 좁은 영역이라 등장방형(위경도 선형) 투영으로 근사합니다.
- */
 export function toMapPoints(vessels: MvpVessel[], bounds: MapBounds): VesselMapPoint[] {
   return vessels.flatMap((vessel) => {
     const { latitude, longitude } = vessel.position;
@@ -110,7 +103,6 @@ export function toSeaState(marine: MarineResponse): SeaState | null {
 }
 
 export function toDashboardAlert(alert: MvpAlert): DashboardAlert {
-  // reasons 는 감점이 큰 순서로 정렬되어 옵니다.
   const [main] = alert.reasons;
   return {
     id: String(alert.mmsi),

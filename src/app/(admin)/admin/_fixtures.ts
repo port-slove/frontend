@@ -1,7 +1,6 @@
 import type { ArrivalQueueItem, BerthStatus } from "./_components/dashboard/types";
 
 // 퍼블리싱용 Figma 샘플 데이터입니다. 백엔드 API 연동 시 TanStack Query 로 교체합니다.
-// 운영 현황의 KPI·지도·해상 상태·확인 필요 카드는 연동을 마쳤고, 입항 순서·선석 현황만 남았습니다.
 
 export const adminUserFixture = {
   name: "REVLIS",

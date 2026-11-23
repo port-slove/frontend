@@ -3,17 +3,15 @@ import { formatKstTimeFrom } from "../../_lib/format";
 import { MAP_STATE_LABELS, REASON_LABELS, trustTone } from "../../_lib/reliability";
 import type { VesselDetail, VesselRow } from "./types";
 
-/** 이름이 수신되지 않은 선박 표시 */
 const UNKNOWN_NAME = "선명 미수신";
 
-/** 속도 막대의 최대값(kn). 백엔드 정상 속력 상한 35kn 대신 일반 상선 기준으로 잡았습니다. */
+// 속도 막대 최대값(kn). 백엔드 상한 35kn 대신 일반 상선 기준입니다.
 const SOG_SCALE_KN = 20;
 
 function formatCog(deg: number) {
   return `${String(Math.round(deg) % 360).padStart(3, "0")}°`;
 }
 
-/** evaluatedAt: 목록 응답의 evaluated_at_utc. 수신 날짜가 다르면 날짜를 함께 보여 줍니다. */
 export function toVesselRow(
   vessel: MvpVessel,
   names: Map<number, string>,

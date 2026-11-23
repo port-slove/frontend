@@ -14,9 +14,6 @@ import { VESSEL_ZONE_FILTERS, type VesselZoneFilter } from "./types";
 import { VesselDetailPanel } from "./vessel-detail-panel";
 import { VesselTable } from "./vessel-table";
 
-// 선박 목록은 /v1/mvp/vessels(인천항 AIS 관측 + 신뢰도)를 쓰고,
-// 선명은 /v1/ais/positions 의 AISStream 메타데이터에서 MMSI 로 찾아 붙입니다.
-
 export function VesselMonitor() {
   const vesselsQuery = useQuery(mvpQueries.vessels());
   // 선명은 보조 정보라 실패해도 목록은 MMSI 로 보여 줍니다.

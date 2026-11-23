@@ -17,7 +17,6 @@ import type { DashboardAlert } from "./types";
 export interface AlertsCardProps {
   alerts: DashboardAlert[];
   total: number;
-  /** alerts 대신 보여 줄 로딩·빈 상태·에러 안내 */
   message?: ReactNode;
 }
 
