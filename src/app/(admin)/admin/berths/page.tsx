@@ -1,5 +1,6 @@
-import { PageTitle } from "@/shared/ui";
+import { BerthSchedule } from "./_components/berth-schedule";
+import { berthScheduleFixture } from "./_fixtures";
 
 export default function Page() {
-  return <PageTitle title="선석 스케줄" />;
+  return <BerthSchedule {...berthScheduleFixture} />;
 }
